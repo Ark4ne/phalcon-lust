@@ -1,0 +1,10 @@
+.phalcon
+.env
+.idea
+/vendor
+/node_modules
+/bootstrap/compiled.php
+composer.lock
+composer.phar
+phpunit-5.phar
+artisan

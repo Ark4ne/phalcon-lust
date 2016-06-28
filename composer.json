@@ -1,0 +1,10 @@
+{
+  "require": {
+    "php" : ">=5.5",
+    "ext-phalcon" : ">=2.0"
+  },
+  "require-dev": {
+    "phalcon/incubator" : "^2.0",
+    "phpunit/phpunit": "^5.2"
+  }
+}

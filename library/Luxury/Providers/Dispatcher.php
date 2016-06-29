@@ -5,6 +5,8 @@ namespace Luxury\Providers;
 use Luxury\Constants\Services;
 use Luxury\Interfaces\Providable;
 use Phalcon\DiInterface;
+use Phalcon\Events\Manager as EventsManager;
+use Phalcon\Security;
 
 /**
  * Class Dispatcher
@@ -18,13 +20,21 @@ class Dispatcher implements Providable
      */
     public function register(DiInterface $di)
     {
-        $di->setShared(Services::DISPATCHER, function () {
+        echo "Services::DISPATCHER";
+        $di->set(Services::DISPATCHER, function () {
             /* @var \Phalcon\Di $this */
             $dispatcher = new \Phalcon\Mvc\Dispatcher();
 
-            $dispatcher->setEventsManager($this->get(Services::EVENTS_MANAGER));
+            // Create an events manager
+            $eventsManager = new EventsManager();
+
+            // Listen for events produced in the dispatcher using the Security plugin
+            $eventsManager->attach('dispatch:beforeExecuteRoute', $this->{Services::SECURITY});
+
+            // Assign the events manager to the dispatcher
+            $dispatcher->setEventsManager($eventsManager);
 
             return $dispatcher;
-        });
+        }, true);
     }
 }

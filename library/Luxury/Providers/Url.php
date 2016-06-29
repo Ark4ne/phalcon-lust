@@ -23,7 +23,7 @@ class Url implements Providable
         $di->setShared(Services::URL, function () {
             /* @var \Phalcon\Di $this */
             $url = new \Phalcon\Mvc\Url();
-            $url->setBaseUri($this->get(Services::CONFIG)->application->baseUri);
+            $url->setBaseUri($this->{Services::CONFIG}->application->baseUri);
 
             return $url;
         });

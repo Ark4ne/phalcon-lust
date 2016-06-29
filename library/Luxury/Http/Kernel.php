@@ -1,6 +1,6 @@
 <?php
 
-namespace Luxury\Foundation;
+namespace Luxury\Http;
 
 use Luxury\Constants\Services;
 use Luxury\Interfaces\Kernel as KernelInterface;
@@ -10,7 +10,7 @@ use Luxury\Interfaces\Kernel as KernelInterface;
  *
  * @package Luxury\Foundation
  */
-abstract class HttpKernel implements KernelInterface
+abstract class Kernel implements KernelInterface
 {
     /**
      * @inheritdoc

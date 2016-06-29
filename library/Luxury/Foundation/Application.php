@@ -24,14 +24,8 @@ class Application extends PhalconApp
     private $kernel;
 
     /**
-     * Application constructor.
-     */
-    public function __construct()
-    {
-        parent::__construct();
-    }
-
-    /**
+     * Construct Application
+     * 
      * @param $kernelName
      */
     public function make($kernelName)
@@ -45,13 +39,6 @@ class Application extends PhalconApp
         $this->kernel->bootstrap($this->getDI());
     }
 
-    /**
-     * @param \Luxury\Interfaces\Kernel $kernel
-     */
-    private function setKernel(Kernel $kernel)
-    {
-        $this->kernel = $kernel;
-    }
 
     protected function bootstrap()
     {
@@ -92,40 +79,10 @@ class Application extends PhalconApp
     }
 
     /**
-     * Register a binding in the container.
-     *
-     * @param  string               $abstract
-     * @param  \Closure|string|null $concrete
-     * @param bool                  $shared
+     * @param \Luxury\Interfaces\Kernel $kernel
      */
-    public function bind($abstract, $concrete, $shared = true)
+    private function setKernel(Kernel $kernel)
     {
-        $this->getDI()->set($abstract, $concrete, $shared);
-    }
-
-    /**
-     * Register a shared binding in the container.
-     *
-     * @param  string               $abstract
-     * @param  \Closure|string|null $concrete
-     *
-     * @return void
-     */
-    public function singleton($abstract, $concrete)
-    {
-        $this->bind($abstract, $concrete, true);
-    }
-
-    /**
-     * Register an existing instance as shared in the container.
-     *
-     * @param  string $abstract
-     * @param  mixed  $instance
-     *
-     * @return void
-     */
-    public function instance($abstract, $instance)
-    {
-        $this->singleton($abstract, $instance);
+        $this->kernel = $kernel;
     }
 }

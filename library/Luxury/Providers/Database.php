@@ -22,7 +22,7 @@ class Database implements Providable
     {
         $di->setShared(Services::DB, function () {
             /* @var \Phalcon\Di $this */
-            $dbConfig = $this->get(Services::CONFIG)->database->toArray();
+            $dbConfig = $this->{Services::CONFIG}->database->toArray();
             $adapter  = $dbConfig['adapter'];
             unset($dbConfig['adapter']);
 

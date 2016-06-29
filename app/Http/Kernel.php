@@ -2,7 +2,7 @@
 
 namespace App\Http;
 
-use Luxury\Foundation\HttpKernel;
+use Luxury\Http\Kernel as HttpKernel;
 use Luxury\Interfaces\Kernel as KernelInterface;
 use Phalcon\Di;
 use Phalcon\Mvc\Router;
@@ -32,11 +32,11 @@ class Kernel extends HttpKernel implements KernelInterface
             \Luxury\Providers\Session::class,
             \Luxury\Providers\Router::class,
             \Luxury\Providers\View::class,
+            \Luxury\Providers\Dispatcher::class,
+            \Luxury\Providers\Database::class,
             /*
              * Service provided by the Phalcon\Di\FactoryDefault
              *
-            \Luxury\Providers\Dispatcher::class,
-            \Luxury\Providers\Database::class,
             \Luxury\Providers\Models::class,
             \Luxury\Providers\Cookies::class,
             \Luxury\Providers\Filter::class,
@@ -44,7 +44,12 @@ class Kernel extends HttpKernel implements KernelInterface
             \Luxury\Providers\Security::class,
             \Luxury\Providers\Crypt::class,
             \Luxury\Providers\Annotations::class,
-            */
+            /**/
+
+            /*
+             * Auth Service
+             */
+            \Luxury\Providers\Auth::class,
 
             /*
              * You're Providers
@@ -72,6 +77,11 @@ class Kernel extends HttpKernel implements KernelInterface
             'namespace'  => 'App\Http\Controllers',
             'controller' => 'index',
             'action'     => 'index'
+        ]);
+        $router->addPost('/auth/login', [
+            'namespace'  => 'App\Http\Controllers',
+            'controller' => 'auth',
+            'action'     => 'login'
         ]);
     }
 }

@@ -11,6 +11,7 @@ final class Services
 {
     const ANNOTATIONS         = 'annotations';
     const ASSETS              = 'assets';
+    const AUTH                = 'auth';
     const CONFIG              = 'config';
     const COOKIES             = 'cookies';
     const CRYPT               = 'crypt';

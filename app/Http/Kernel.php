@@ -4,7 +4,6 @@ namespace App\Http;
 
 use Luxury\Http\Kernel as HttpKernel;
 use Luxury\Interfaces\Kernel as KernelInterface;
-use Phalcon\Di;
 use Phalcon\Mvc\Router;
 
 /**
@@ -49,12 +48,7 @@ class Kernel extends HttpKernel implements KernelInterface
             /*
              * Auth Service
              */
-            \Luxury\Providers\Auth::class,
-
-            /*
-             * You're Providers
-             */
-            \App\Providers\SomeApiServices::class
+            \Luxury\Providers\Auth::class
         ];
     }
 
@@ -62,24 +56,23 @@ class Kernel extends HttpKernel implements KernelInterface
      * Register the routes of the application.
      *
      * @param \Phalcon\Mvc\Router $router
-     *
-     * @return mixed
+     * @param string              $base
      */
-    public function routes(Router $router)
+    public function routes(\Phalcon\Mvc\Router $router, $base = '')
     {
+        $router->setDefaultNamespace('App\Http\Controllers');
+
         $router->notFound([
-            'namespace'  => 'App\Http\Controllers',
             'controller' => 'errors',
             'action'     => 'http404'
         ]);
 
-        $router->addGet('/', [
-            'namespace'  => 'App\Http\Controllers',
+        $router->addGet($base, [
             'controller' => 'index',
             'action'     => 'index'
         ]);
-        $router->addPost('/auth/login', [
-            'namespace'  => 'App\Http\Controllers',
+
+        $router->addPost($base . '/auth/login', [
             'controller' => 'auth',
             'action'     => 'login'
         ]);

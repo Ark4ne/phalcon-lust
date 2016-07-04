@@ -185,19 +185,6 @@ class AuthManager extends Injector
     }
 
     /**
-     * @param $user
-     */
-    private function registerSession($user)
-    {
-        $this->session->set(
-            'auth', [
-                'id'   => $user->id,
-                'name' => $user->name
-            ]
-        );
-    }
-
-    /**
      * Retrieve session id
      *
      * @return mixed

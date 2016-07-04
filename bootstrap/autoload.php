@@ -4,6 +4,8 @@ error_reporting(E_ALL);
 
 define('APP_PATH', realpath(__DIR__ . '/../'));
 
+define('APP_ENV', 'development');
+
 /**
  * Read the configuration
  */

@@ -25,7 +25,7 @@ class Session implements Providable
         $di->setShared(Services::SESSION, function () {
             /* @var \Phalcon\Di $this */
             /* @var \Phalcon\Session\Adapter|\Phalcon\Session\AdapterInterface $session */
-            $class = 'Phalcon\Session\Adapter\\' . $this->{Services::CONFIG}->session->adapter;
+            $class = 'Phalcon\Session\Adapter\\' . $this->getShared(Services::CONFIG)->session->adapter;
             try {
                 $session = new $class();
             } catch (\Exception $e) {

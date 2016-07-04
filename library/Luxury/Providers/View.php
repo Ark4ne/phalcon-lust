@@ -25,7 +25,7 @@ class View implements Providable
 
             $view = new \Phalcon\Mvc\View();
 
-            $view->setViewsDir($this->{Services::CONFIG}->application->viewsDir);
+            $view->setViewsDir($this->getShared(Services::CONFIG)->application->viewsDir);
 
             $view->registerEngines([
                 '.volt'  => function ($view, $di) {
@@ -33,7 +33,7 @@ class View implements Providable
                     $volt = new \Phalcon\Mvc\View\Engine\Volt($view, $di);
 
                     $volt->setOptions([
-                        'compiledPath'      => $di->{Services::CONFIG}->application->cacheDir,
+                        'compiledPath'      => $di->getShared(Services::CONFIG)->application->cacheDir,
                         'compiledSeparator' => '_'
                     ]);
 

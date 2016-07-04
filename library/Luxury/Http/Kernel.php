@@ -13,19 +13,40 @@ use Luxury\Interfaces\Kernel as KernelInterface;
 abstract class Kernel implements KernelInterface
 {
     /**
-     * @inheritdoc
+     * This methods registers the services to be used by the application
+     *
+     * @param \Phalcon\DiInterface $di
+     *
+     * @return \string[]|void
      */
-    public function bootstrap(\Phalcon\DiInterface $di)
+    public function registerServices(\Phalcon\DiInterface $di)
     {
-        $this->routes($di->get(Services::ROUTER));
+        $services = $this->providers();
+        foreach ($services as $service) {
+            /* @var \Luxury\Interfaces\Providable $srv */
+            $srv = new $service();
+
+            $srv->register($di);
+        }
     }
 
     /**
-     * Register the routes of the application.
+     * This methods registers the routes of the application
      *
-     * @param \Phalcon\Mvc\Router $router
+     * @param \Phalcon\DiInterface $di
      *
-     * @return mixed
+     * @return \string[]|void
      */
-    public abstract function routes(\Phalcon\Mvc\Router $router);
+    public function registerRoutes(\Phalcon\DiInterface $di)
+    {
+        /* @var \Phalcon\Mvc\Router $router */
+        $router = $di->getShared(Services::ROUTER);
+
+        /* @var \Phalcon\Config $config */
+        $config = $di->getShared(Services::CONFIG);
+
+        $base = isset($config->application->baseUri) ? $config->application->baseUri : '';
+
+        $this->routes($router, $base);
+    }
 }

@@ -24,7 +24,7 @@ class Logger implements Providable
     {
         $di->setShared(Services::LOGGER, function () {
             /* @var \Phalcon\Di $this */
-            return new \Phalcon\Logger\Adapter\File\Multiple($this->{Services::CONFIG}->application->logDir);
+            return new \Phalcon\Logger\Adapter\File\Multiple($this->getShared(Services::CONFIG)->application->logDir);
         });
     }
 }

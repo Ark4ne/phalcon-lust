@@ -114,6 +114,6 @@ abstract class Facade
             return static::$resolvedInstance[$name];
         }
 
-        return static::$resolvedInstance[$name] = static::$di->get($name);
+        return static::$resolvedInstance[$name] = static::$di->getShared($name);
     }
 }

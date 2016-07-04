@@ -18,6 +18,6 @@ class Security implements Providable
      */
     public function register(DiInterface $di)
     {
-        $di->setShared(Services::SECURITY, \Phalcon\Security::class);
+        $di->setShared(Services::SECURITY, \Luxury\Security\SecurityPlugin::class);
     }
 }

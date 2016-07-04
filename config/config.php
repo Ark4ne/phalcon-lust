@@ -20,5 +20,14 @@ return [
     ],
     'session'     => [
         'adapter' => 'Files' // Files, Memcache, Libmemcached, Redis
+    ],
+    'error'       => [
+        'formatter'  => [
+            'formatter'  => \Phalcon\Logger\Formatter\Line::class,
+            'format'     => '[%date%][%type%] %message%',
+            'dateFormat' => 'Y-m-d H:i:s O'
+        ],
+        'controller' => 'errors',
+        'action'     => 'index',
     ]
 ];

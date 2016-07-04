@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use Luxury\Support\Facades\Auth;
+
 /**
  * Class AuthController
  *
@@ -12,7 +14,6 @@ class AuthController extends ControllerBase
 
     public function signinAction()
     {
-
     }
 
     public function loginAction()

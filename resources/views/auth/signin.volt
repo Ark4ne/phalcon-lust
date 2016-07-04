@@ -1,19 +1,30 @@
-{{ form('session/start') }}
-    <fieldset>
-        <div>
-            <label for="email">Username/Email</label>
-            <div>
-                {{ text_field('email') }}
+{# auth\signin.volt #}
+{% extends "templates/layout.volt" %}
+
+{% block title %}Sign in{{ super() }}{% endblock %}
+
+{% block content %}
+    <div class="container">
+        {{ form('auth/login', 'class' : 'form-horizontal') }}
+        <fieldset>
+            <div class="form-group">
+                <label for="email" class="col-sm-2 control-label">Username/Email</label>
+                <div class="col-sm-10">
+                    {{ text_field('email', 'class' :'form-control') }}
+                </div>
             </div>
-        </div>
-        <div>
-            <label for="password">Password</label>
-            <div>
-                {{ password_field('password') }}
+            <div class="form-group">
+                <label for="password" class="col-sm-2 control-label">Password</label>
+                <div class="col-sm-10">
+                    {{ password_field('password',  'class' :'form-control') }}
+                </div>
             </div>
-        </div>
-        <div>
-            {{ submit_button('Login') }}
-        </div>
-    </fieldset>
-</form>
+            <div class="form-group">
+                <div class="col-sm-offset-2 col-sm-10">
+                    {{ submit_button('Login',  'class' :'btn btn-default') }}
+                </div>
+            </div>
+        </fieldset>
+        {{ end_form() }}
+    </div>
+{% endblock %}

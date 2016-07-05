@@ -1,6 +1,6 @@
 <?php
 
-namespace Luxury\Http;
+namespace Luxury\Foundation;
 
 use Luxury\Constants\Services;
 use Luxury\Interfaces\Kernel as KernelInterface;

@@ -2,7 +2,7 @@
 
 namespace App\Http;
 
-use Luxury\Http\Kernel as HttpKernel;
+use Luxury\Foundation\Kernel as CoreKernel;
 use Luxury\Interfaces\Kernel as KernelInterface;
 use Phalcon\Mvc\Router;
 
@@ -11,7 +11,7 @@ use Phalcon\Mvc\Router;
  *
  * @package App\Http\Controllers
  */
-class Kernel extends HttpKernel implements KernelInterface
+class Kernel extends CoreKernel implements KernelInterface
 {
     /**
      * Return Services to load.

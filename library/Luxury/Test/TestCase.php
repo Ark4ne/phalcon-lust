@@ -3,6 +3,7 @@
 namespace Luxury\Test;
 
 use Luxury\Foundation\Application;
+use Mockery;
 use Phalcon\Config;
 use Phalcon\Di;
 use Phalcon\Di\FactoryDefault;
@@ -50,6 +51,7 @@ abstract class TestCase extends UnitTestCase implements InjectionAwareInterface
 
     protected function tearDown()
     {
+        Mockery::close();
         $this->getDI()->reset();
         $this->app = null;
 

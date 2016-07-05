@@ -18,7 +18,7 @@
   |          Serghei Iakovlev <serghei@phalconphp.com>                     |
   +------------------------------------------------------------------------+
 */
-namespace Phalcon\Error;
+namespace Luxury\Error;
 
 use Luxury\Constants\Env;
 use Luxury\Constants\Services;
@@ -95,7 +95,7 @@ class Handler
     /**
      * Logs the error and dispatches an error controller.
      *
-     * @param  \Phalcon\Error\Error $error
+     * @param  \Luxury\Error\Error $error
      *
      * @return null|mixed
      */

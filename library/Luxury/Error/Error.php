@@ -17,7 +17,7 @@
   |          Nikita Vershinin <endeveit@gmail.com>                         |
   +------------------------------------------------------------------------+
 */
-namespace Phalcon\Error;
+namespace Luxury\Error;
 
 /**
  * Class Error

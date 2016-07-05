@@ -70,64 +70,6 @@ abstract class Facade
     }
 
     /**
-     * Create a fresh mock instance.
-     *
-     * @return MockInterface
-     */
-    protected static function createFreshMockInstance()
-    {
-        $name = static::getFacadeAccessor();
-
-        static::$resolvedInstance[$name] = $mock = static::createMockByName();
-
-        $mock->shouldAllowMockingProtectedMethods();
-
-        if (isset(static::$di)) {
-            static::$di->setShared($name, $mock);
-        }
-
-        return $mock;
-    }
-
-    /**
-     * Create a fresh mock instance.
-     *
-     * @return MockInterface
-     */
-    protected static function createMockByName()
-    {
-        $class = static::getMockableClass();
-
-        return $class ? Mockery::mock($class) : Mockery::mock();
-    }
-
-    /**
-     * Determines whether a mock is set as the instance of the facade.
-     *
-     * @return bool
-     */
-    protected static function isMock()
-    {
-        $name = static::getFacadeAccessor();
-
-        return isset(static::$resolvedInstance[$name]) && static::$resolvedInstance[$name] instanceof MockInterface;
-    }
-
-    /**
-     * Get the mockable class for the bound instance.
-     *
-     * @return string|null
-     */
-    protected static function getMockableClass()
-    {
-        if ($root = static::getFacadeRoot()) {
-            return get_class($root);
-        }
-
-        return null;
-    }
-
-    /**
      * Get the root object behind the facade.
      *
      * @return mixed
@@ -187,6 +129,64 @@ abstract class Facade
     protected static function getFacadeAccessor()
     {
         throw new RuntimeException('Facade does not implement getFacadeAccessor method.');
+    }
+
+    /**
+     * Create a fresh mock instance.
+     *
+     * @return MockInterface
+     */
+    protected static function createFreshMockInstance()
+    {
+        $name = static::getFacadeAccessor();
+
+        static::$resolvedInstance[$name] = $mock = static::createMockInstance();
+
+        $mock->shouldAllowMockingProtectedMethods();
+
+        if (isset(static::$di)) {
+            static::$di->setShared($name, $mock);
+        }
+
+        return $mock;
+    }
+
+    /**
+     * Create a fresh mock instance.
+     *
+     * @return MockInterface
+     */
+    protected static function createMockInstance()
+    {
+        $class = static::getMockableClass();
+
+        return $class ? Mockery::mock($class) : Mockery::mock();
+    }
+
+    /**
+     * Determines whether a mock is set as the instance of the facade.
+     *
+     * @return bool
+     */
+    protected static function isMock()
+    {
+        $name = static::getFacadeAccessor();
+
+        return isset(static::$resolvedInstance[$name]) && static::$resolvedInstance[$name] instanceof MockInterface;
+    }
+
+    /**
+     * Get the mockable class for the bound instance.
+     *
+     * @return string|null
+     */
+    protected static function getMockableClass()
+    {
+        if ($root = static::getFacadeRoot()) {
+            return get_class($root);
+        }
+
+        return null;
     }
 
     /**

@@ -1,8 +1,8 @@
 <?php
 
 namespace App\Http\Controllers;
-use Phalcon\Error\Handler;
 
+use Luxury\Error\Handler;
 
 /**
  * Class ErrorsController
@@ -13,9 +13,7 @@ class ErrorsController extends ControllerBase
 {
     public function indexAction()
     {
-        /**
-         * @var \Phalcon\Error\Error $error
-         */
+        /* @var \Luxury\Error\Error $error */
         $error = $this->dispatcher->getParam('error');
 
         $this->view->error = [

@@ -31,18 +31,22 @@ class AuthController extends ControllerBase
             $this->flash->error('Wrong email/password');
 
             // Forward to the login form again
-            return $this->dispatcher->forward([
+            $this->dispatcher->forward([
                 'controller' => 'auth',
                 'action'     => 'signin'
             ]);
+
+            return;
         }
 
         $this->flash->success('Welcome ' . $user->name);
 
         // Forward to the 'invoices' controller if the user is valid
-        return $this->dispatcher->forward([
+        $this->dispatcher->forward([
             'controller' => 'index',
             'action'     => 'index'
         ]);
+
+        return;
     }
 }

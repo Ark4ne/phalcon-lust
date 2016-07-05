@@ -3,11 +3,12 @@
 namespace Luxury\Foundation;
 
 use Luxury\Constants\Services;
+use Luxury\Error\Handler as ErrorHandler;
 use Luxury\Interfaces\Kernel;
 use Luxury\Support\Facades\Facade;
+use Phalcon\Di;
 use Phalcon\Di\FactoryDefault as DependencyInjection;
 use Phalcon\Di\Service;
-use Phalcon\Error\Handler as ErrorHandler;
 use Phalcon\Events\Manager as EventsManager;
 use Phalcon\Loader;
 use Phalcon\Mvc\Application as PhalconApp;
@@ -56,7 +57,11 @@ class Application extends PhalconApp
 
     protected function bootstrap()
     {
-        $di = new DependencyInjection();
+        Di::reset();
+
+        $di = new DependencyInjection;
+
+        Di::setDefault($di);
 
         $di->setInternalEventsManager(new EventsManager);
 
@@ -66,10 +71,7 @@ class Application extends PhalconApp
         // Register Di on Application
         $this->setDI($di);
 
-        // Register Application itself on Di
-        //$di->setShared('app', $this);
-
-        $em = new EventsManager();
+        $em = new EventsManager;
         
         $di->setShared(Services::EVENTS_MANAGER, $em);
 

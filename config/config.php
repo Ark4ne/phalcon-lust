@@ -16,7 +16,7 @@ return [
         'cacheDir'      => __DIR__ . '/../storage/caches/',
         'logDir'        => __DIR__ . '/../storage/logs/',
         'vendorDir'     => __DIR__ . '/../vendor/',
-        'baseUri'       => '/',
+        'baseUri'       => '/phalcon-lust/',
     ],
     'session'     => [
         'adapter' => 'Files' // Files, Memcache, Libmemcached, Redis

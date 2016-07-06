@@ -49,7 +49,7 @@ class Kernel extends CoreKernel implements KernelInterface
              * Auth Service
              */
             \Luxury\Providers\Auth::class,
-            
+
             /*
              * SomeApi Service
              */

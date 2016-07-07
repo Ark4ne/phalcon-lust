@@ -103,7 +103,7 @@ class Handler
     {
         $di = Di::getDefault();
 
-        /* @var \Phalcon\Config $logger */
+        /* @var \Phalcon\Config $config */
         $config = $di->getShared(Services::CONFIG)->error;
 
         /* @var \Phalcon\Logger\Adapter $logger */
@@ -163,13 +163,13 @@ class Handler
             case E_COMPILE_ERROR:
             case E_USER_ERROR:
             case E_RECOVERABLE_ERROR:
-                if ($di->has('view')) {
+                if ($di->has(Services::VIEW)) {
                     /* @var \Phalcon\Mvc\Dispatcher $dispatcher */
-                    $dispatcher = $di->getShared('dispatcher');
+                    $dispatcher = $di->getShared(Services::DISPATCHER);
                     /* @var \Phalcon\Mvc\View $view */
-                    $view = $di->getShared('view');
+                    $view = $di->getShared(Services::VIEW);
                     /* @var \Phalcon\Http\Response $response */
-                    $response = $di->getShared('response');
+                    $response = $di->getShared(Services::RESPONSE);
 
                     $dispatcher->setControllerName($config['controller']);
                     $dispatcher->setActionName($config['action']);

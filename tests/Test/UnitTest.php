@@ -13,10 +13,5 @@ class UnitTest extends \TestCase
             'works',
             'This is OK'
         );
-
-        $this->assertEquals('works',
-            'works1',
-            'This will fail'
-        );
     }
 }

@@ -7,10 +7,16 @@ use Phalcon\Di;
  */
 abstract class TestCase extends \Luxury\Test\FuncTestCase
 {
+    /**
+     * @return mixed
+     */
+    protected function kernel()
+    {
+        return \App\Http\Kernel::class;
+    }
+
     public function setUp()
     {
         parent::setUp();
-
-        $this->app->make(\App\Http\Kernel::class);
     }
 }

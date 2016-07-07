@@ -8,7 +8,7 @@ use Luxury\Constants\Services;
  *
  * @package     Luxury\Test
  */
-class FuncTestCase extends TestCase
+abstract class FuncTestCase extends TestCase
 {
 
     /**

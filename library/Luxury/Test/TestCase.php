@@ -35,6 +35,11 @@ abstract class TestCase extends UnitTestCase implements InjectionAwareInterface
     protected $app;
 
     /**
+     * @var Application
+     */
+    protected static $_app;
+
+    /**
      * This method is called before a test is executed.
      */
     protected function setUp()
@@ -44,15 +49,32 @@ abstract class TestCase extends UnitTestCase implements InjectionAwareInterface
         $this->checkExtension('phalcon');
 
         // Creating the application
-        $app = new \Luxury\Foundation\Application();
+        $this->app = new \Luxury\Foundation\Application();
+        $this->app->make($this->kernel());
+    }
 
-        $this->app = $app;
+    /**
+     * @return string
+     */
+    protected abstract function kernel();
+
+    /**
+     * @return \Luxury\Foundation\Application
+     */
+    protected function globalApp()
+    {
+        if (self::$_app == null) {
+            self::$_app = new \Luxury\Foundation\Application();
+            self::$_app->make($this->kernel());
+        }
+
+        return self::$_app;
     }
 
     protected function tearDown()
     {
         Mockery::close();
-        $this->getDI()->reset();
+        $this->app->getDI()->reset();
         $this->app = null;
 
         parent::tearDown();
@@ -72,12 +94,12 @@ abstract class TestCase extends UnitTestCase implements InjectionAwareInterface
 
         if (is_array($extension)) {
             foreach ($extension as $ext) {
-                if (! extension_loaded($ext)) {
+                if (!extension_loaded($ext)) {
                     $this->markTestSkipped($message($ext));
                     break;
                 }
             }
-        } elseif (! extension_loaded($extension)) {
+        } elseif (!extension_loaded($extension)) {
             $this->markTestSkipped($message($extension));
         }
     }
@@ -137,7 +159,7 @@ abstract class TestCase extends UnitTestCase implements InjectionAwareInterface
      */
     public function getConfig()
     {
-        if (! $this->config instanceof Config && $this->getDI()->has('config')) {
+        if (!$this->config instanceof Config && $this->getDI()->has('config')) {
             return $this->getDI()->getShared('config');
         }
 

@@ -40,13 +40,13 @@ class Application extends PhalconApp
     /**
      * Construct Application
      * 
-     * @param $kernelName
+     * @param $kernelClass
      */
-    public function make($kernelName)
+    public function make($kernelClass)
     {
         $this->bootstrap();
 
-        $this->setKernel(new $kernelName());
+        $this->setKernel(new $kernelClass());
 
         $di = $this->getDI();
 

@@ -5,7 +5,6 @@ namespace Luxury\Providers;
 use Luxury\Constants\Services;
 use Luxury\Interfaces\Providable;
 use Phalcon\DiInterface;
-use Phalcon\Events\Manager as EventsManager;
 use Phalcon\Security;
 
 /**

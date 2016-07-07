@@ -27,7 +27,8 @@ class Dispatcher implements Providable
             $eventsManager = $this->getShared(Services::EVENTS_MANAGER);
 
             // Listen for events produced in the dispatcher using the Security plugin
-            $eventsManager->attach('dispatch:beforeExecuteRoute', $this->getShared(Services::SECURITY));
+            $eventsManager->attach('dispatch:beforeExecuteRoute',
+                $this->getShared(Services::SECURITY));
 
             // Assign the events manager to the dispatcher
             $dispatcher->setEventsManager($eventsManager);

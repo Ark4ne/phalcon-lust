@@ -10,6 +10,11 @@ namespace Luxury\Test;
 
 use Luxury\Constants\Services;
 
+/**
+ * Class RoutesTestCase
+ *
+ * @package Luxury\Test
+ */
 abstract class RoutesTestCase extends FuncTestCase
 {
     private static $testedRoutes = [];
@@ -19,6 +24,9 @@ abstract class RoutesTestCase extends FuncTestCase
      */
     protected abstract function routes();
 
+    /**
+     * @return array
+     */
     public function routesProvider()
     {
         $routes = $this->routes();

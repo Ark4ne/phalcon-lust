@@ -4,7 +4,7 @@ namespace Luxury\Middleware;
 
 use Phalcon\Di\Injectable;
 use Phalcon\DiInterface;
-use Phalcon\Mvc\Micro\MiddlewareInterface;
+
 
 /**
  * Class Contract

@@ -2,13 +2,13 @@
 
 namespace Luxury\Observator;
 
-use Luxury\Constants\Services;
+
 use Luxury\Foundation\Application;
-use Luxury\Support\Facades\Facade;
+
 use Luxury\Support\Facades\Log;
 use Phalcon\Di;
 use Phalcon\Events\Event;
-use Phalcon\Events\Manager;
+
 
 /**
  * Class Events

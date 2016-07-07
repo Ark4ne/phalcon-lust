@@ -17,11 +17,23 @@ try {
 
     $application->make(App\Http\Kernel::class);
 
+    // \Luxury\Observator\Events::observeAll($application);
+
     /**
      * Handle the request
      */
-    echo $application->handle()->getContent();
+    $response = $application->handle();
 
+    $response->send();
+    /*
+        $events = \Luxury\Observator\Events::getRaised();
+
+        echo '<pre>';
+        foreach ($events as $event) {
+            echo get_class($event->getSource()) . ':' . $event->getType() . PHP_EOL;
+        }
+        echo '</pre>';
+    */
 } catch (\Exception $e) {
     echo $e->getMessage() . '<br>';
     echo '<pre>' . $e->getTraceAsString() . '</pre>';

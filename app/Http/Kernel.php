@@ -77,7 +77,7 @@ class Kernel extends CoreKernel implements KernelInterface
             'action'     => 'index'
         ]);
 
-        $router->addPost($base . '/auth/login', [
+        $router->addPost($base . 'auth/login', [
             'controller' => 'auth',
             'action'     => 'login'
         ]);

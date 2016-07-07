@@ -13,18 +13,11 @@ use Phalcon\DiInterface;
  */
 class Router implements Providable
 {
-
     /**
      * @param \Phalcon\DiInterface $di
      */
     public function register(DiInterface $di)
     {
-        //Registering Http\Response
-        $di->setShared(Services::RESPONSE, \Phalcon\Http\Response::class);
-
-        //Registering Http\Request
-        $di->setShared(Services::REQUEST, \Phalcon\Http\Request::class);
-
         //Registering the Router
         $di->setShared(Services::ROUTER, function () {
             $router = new \Phalcon\Mvc\Router(false);

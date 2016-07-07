@@ -3,7 +3,7 @@
 
 {% block title %} : Tx Phalcon{% endblock %}
 {% block head %}
-    <link rel="stylesheet" href="{{ url('css/bootstrap.min.css') }}">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
 {% endblock %}
 {% block scripts %}
     <!-- jQuery (necessary for Bootstrap's JavaScript plugins)

@@ -20,7 +20,7 @@ class Dispatcher implements Providable
      */
     public function register(DiInterface $di)
     {
-        $di->set(Services::DISPATCHER, function () {
+        $di->setShared(Services::DISPATCHER, function () {
             /* @var \Phalcon\Di $this */
             $dispatcher = new \Phalcon\Mvc\Dispatcher();
 
@@ -34,6 +34,6 @@ class Dispatcher implements Providable
             $dispatcher->setEventsManager($eventsManager);
 
             return $dispatcher;
-        }, true);
+        });
     }
 }

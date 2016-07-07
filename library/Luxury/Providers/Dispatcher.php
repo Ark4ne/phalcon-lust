@@ -25,7 +25,7 @@ class Dispatcher implements Providable
             $dispatcher = new \Phalcon\Mvc\Dispatcher();
 
             // Create an events manager
-            $eventsManager = new EventsManager();
+            $eventsManager = $this->getShared(Services::EVENTS_MANAGER);
 
             // Listen for events produced in the dispatcher using the Security plugin
             $eventsManager->attach('dispatch:beforeExecuteRoute', $this->getShared(Services::SECURITY));

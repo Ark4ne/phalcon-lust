@@ -3,8 +3,6 @@
 namespace Luxury\Middleware;
 
 use Phalcon\Di\Injectable;
-use Phalcon\DiInterface;
-
 
 /**
  * Class Contract

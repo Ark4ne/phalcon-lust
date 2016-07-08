@@ -20,11 +20,15 @@ class SomeApi extends Injectable implements InjectionAwareInterface
         $logger = $this->getDI()->get(Services::LOGGER);
 
         $logger->debug('Something Appends !');
+
+        return 'abc';
     }
 
     public function doAnotherThing()
     {
         // Use Facade
         Log::debug('Another thing Appends !');
+
+        return 'abc';
     }
 }

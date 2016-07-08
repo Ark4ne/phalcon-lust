@@ -2,8 +2,19 @@
 
 namespace App\Http;
 
-use Luxury\Foundation\Kernel as CoreKernel;
+use Luxury\Foundation\Kernel as KernelCore;
 use Luxury\Interfaces\Kernel as KernelInterface;
+use Luxury\Middleware\Throttle as ThrottleMiddleware;
+use Luxury\Providers\Auth as AuthProvider;
+use Luxury\Providers\Config as ConfigProvider;
+use Luxury\Providers\Database as DatabaseProvider;
+use Luxury\Providers\Dispatcher as DispatcherProvider;
+use Luxury\Providers\Flash as FlashProvider;
+use Luxury\Providers\Logger as LoggerProvider;
+use Luxury\Providers\Router as RouterProvider;
+use Luxury\Providers\Session as SessionProvider;
+use Luxury\Providers\Url as UrlProvider;
+use Luxury\Providers\View as ViewProvider;
 use Phalcon\Mvc\Router;
 
 /**
@@ -11,59 +22,65 @@ use Phalcon\Mvc\Router;
  *
  * @package App\Http\Controllers
  */
-class Kernel extends CoreKernel implements KernelInterface
+class Kernel extends KernelCore implements KernelInterface
 {
     /**
-     * Return Services to load.
+     * Return the Provider List to load.
      *
-     * @return string[]
+     * @var string[]
      */
-    public function providers()
-    {
-        return [
-            /*
-             * Basic Configuration
-             */
-            \Luxury\Providers\Config::class,
-            \Luxury\Providers\Logger::class,
-            \Luxury\Providers\Url::class,
-            \Luxury\Providers\Flash::class,
-            \Luxury\Providers\Session::class,
-            \Luxury\Providers\Router::class,
-            \Luxury\Providers\View::class,
-            \Luxury\Providers\Dispatcher::class,
-            \Luxury\Providers\Database::class,
-            /*
-             * Service provided by the Phalcon\Di\FactoryDefault
-             *
-            \Luxury\Providers\Models::class,
-            \Luxury\Providers\Cookies::class,
-            \Luxury\Providers\Filter::class,
-            \Luxury\Providers\Escaper::class,
-            \Luxury\Providers\Security::class,
-            \Luxury\Providers\Crypt::class,
-            \Luxury\Providers\Annotations::class,
-            /**/
+    protected $providers = [
+        /*
+         * Basic Configuration
+         */
+        ConfigProvider::class,
+        LoggerProvider::class,
+        UrlProvider::class,
+        FlashProvider::class,
+        SessionProvider::class,
+        RouterProvider::class,
+        ViewProvider::class,
+        DispatcherProvider::class,
+        DatabaseProvider::class,
+        /*
+         * Service provided by the Phalcon\Di\FactoryDefault
+         *
+        \Luxury\Providers\Models::class,
+        \Luxury\Providers\Cookies::class,
+        \Luxury\Providers\Filter::class,
+        \Luxury\Providers\Escaper::class,
+        \Luxury\Providers\Security::class,
+        \Luxury\Providers\Crypt::class,
+        \Luxury\Providers\Annotations::class,
+        /**/
 
-            /*
-             * Auth Service
-             */
-            \Luxury\Providers\Auth::class,
+        /*
+         * Auth Service
+         */
+        AuthProvider::class,
 
-            /*
-             * SomeApi Service
-             */
-            \App\Providers\SomeApiServices::class
-        ];
-    }
+        /*
+         * SomeApi Service
+         */
+        \App\Providers\SomeApiServices::class
+    ];
+
+    /**
+     * Return the Middleware List to load.
+     *
+     * @var string[]
+     */
+    protected $middlewares = [
+        ThrottleMiddleware::class
+    ];
 
     /**
      * Register the routes of the application.
      *
-     * @param \Phalcon\Mvc\Router $router
-     * @param string              $base
+     * @param Router $router
+     * @param string $base
      */
-    public function routes(\Phalcon\Mvc\Router $router, $base = '')
+    public function routes(Router $router, $base = '')
     {
         $router->setDefaultNamespace('App\Http\Controllers');
 

@@ -49,10 +49,9 @@ class Application extends PhalconApp
 
         $this->setKernel(new $kernelClass());
 
-        $di = $this->getDI();
-
-        $this->kernel->registerServices($di);
-        $this->kernel->registerRoutes($di);
+        $this->kernel->registerServices($this);
+        $this->kernel->registerMiddlewares($this);
+        $this->kernel->registerRoutes($this);
     }
 
 

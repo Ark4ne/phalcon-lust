@@ -2,7 +2,8 @@
 
 namespace Luxury\Middleware;
 
-use Luxury\Middleware\Contracts\Application as ApplicationContracts;
+use Luxury\Constants\Events as EventSpaces;
+use Luxury\Support\Facades\Log;
 use Phalcon\Events\Event;
 
 /**
@@ -10,8 +11,12 @@ use Phalcon\Events\Event;
  *
  * @package     Luxury\Middleware
  */
-class Throttle extends Middleware implements ApplicationContracts
+class Throttle extends Middleware
 {
+    protected $space = [
+        EventSpaces::DISPATCH
+    ];
+
     /**
      * Event : dispatcher:beforeExecuteRoute
      *
@@ -22,6 +27,6 @@ class Throttle extends Middleware implements ApplicationContracts
      */
     public function beforeExecuteRoute(Event $event, $handler)
     {
-        // TODO 
+        Log::notice(__METHOD__);
     }
 }

@@ -2,7 +2,6 @@
 
 namespace Luxury\Foundation;
 
-use Luxury\Constants\Services;
 use Luxury\Interfaces\Kernel as KernelInterface;
 
 /**
@@ -13,18 +12,31 @@ use Luxury\Interfaces\Kernel as KernelInterface;
 abstract class Kernel implements KernelInterface
 {
     /**
+     * Return the Provider List to load.
+     *
+     * @var string[]
+     */
+    protected $providers = [];
+
+    /**
+     * Return the Middleware List to load.
+     *
+     * @var string[]
+     */
+    protected $middlewares = [];
+
+    /**
      * This methods registers the services to be used by the application
      *
-     * @param \Phalcon\DiInterface $di
-     *
-     * @return \string[]|void
+     * @param Application $app
      */
-    public function registerServices(\Phalcon\DiInterface $di)
+    public function registerServices(Application $app)
     {
-        $services = $this->providers();
-        foreach ($services as $service) {
+        $di = $app->getDI();
+
+        foreach ($this->providers as $provider) {
             /* @var \Luxury\Interfaces\Providable $srv */
-            $srv = new $service();
+            $srv = new $provider();
 
             $srv->register($di);
         }
@@ -33,20 +45,35 @@ abstract class Kernel implements KernelInterface
     /**
      * This methods registers the routes of the application
      *
-     * @param \Phalcon\DiInterface $di
-     *
-     * @return \string[]|void
+     * @param Application $app
      */
-    public function registerRoutes(\Phalcon\DiInterface $di)
+    public function registerRoutes(Application $app)
     {
-        /* @var \Phalcon\Mvc\Router $router */
-        $router = $di->getShared(Services::ROUTER);
+        $router = $app->router;
 
-        /* @var \Phalcon\Config $config */
-        $config = $di->getShared(Services::CONFIG);
+        $config = $app->config;
 
         $base = isset($config->application->baseUri) ? $config->application->baseUri : '';
 
         $this->routes($router, $base);
+    }
+
+    /**
+     * This methods registers the middlewares to be used by the application
+     *
+     * @param Application $app
+     */
+    public function registerMiddlewares(Application $app)
+    {
+        foreach ($this->middlewares as $middleware) {
+            /* @var \Luxury\Middleware\Middleware $middleware */
+            $middleware = new $middleware;
+
+            $middleware->setDI($app->getDI());
+
+            $middleware->setEventsManager($app->getEventsManager());
+
+            $middleware->attach();
+        }
     }
 }

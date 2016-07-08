@@ -71,6 +71,7 @@ class Kernel extends KernelCore implements KernelInterface
      * @var string[]
      */
     protected $middlewares = [
+        ThrottleMiddleware::class
     ];
 
     /**

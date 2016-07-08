@@ -11,7 +11,6 @@ namespace Luxury\Constants\Events;
  */
 final class Acl
 {
-    const SPACE               = 'acl';
     const BEFORE_CHECK_ACCESS = 'acl:beforeCheckAccess';
     const AFTER_CHECK_ACCESS  = 'acl:afterCheckAccess';
 }

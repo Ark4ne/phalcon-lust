@@ -11,7 +11,6 @@ namespace Luxury\Constants\Events;
  */
 final class Application
 {
-    const SPACE                 = 'application';
     const BOOT                  = 'application:boot';
     const BEFORE_START_MODULE   = 'application:beforeStartModule';
     const AFTER_START_MODULE    = 'application:afterStartModule';

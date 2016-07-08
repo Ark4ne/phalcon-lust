@@ -11,7 +11,6 @@ namespace Luxury\Constants\Events;
  */
 final class Volt
 {
-    const SPACE              = 'volt';
     const COMPILE_FUNCTION   = 'volt:compileFunction';
     const COMPILE_FILTER     = 'volt:compileFilter';
     const RESOLVE_EXPRESSION = 'volt:resolveExpression';

@@ -11,7 +11,6 @@ namespace Luxury\Constants\Events;
  */
 final class Collection
 {
-    const SPACE                       = 'collection';
     const BEFORE_VALIDATION           = 'collection:beforeValidation';
     const BEFORE_VALIDATION_ON_CREATE = 'collection:beforeValidationOnCreate';
     const BEFORE_VALIDATION_ON_UPDATE = 'collection:beforeValidationOnUpdate';

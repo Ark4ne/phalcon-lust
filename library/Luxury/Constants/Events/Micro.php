@@ -11,7 +11,6 @@ namespace Luxury\Constants\Events;
  */
 final class Micro
 {
-    const SPACE                = 'micro';
     const BEFORE_HANDLE_ROUTE  = 'micro:beforeHandleRoute';
     const BEFORE_EXECUTE_ROUTE = 'micro:beforeExecuteRoute';
     const AFTER_EXECUTE_ROUTE  = 'micro:afterExecuteRoute';

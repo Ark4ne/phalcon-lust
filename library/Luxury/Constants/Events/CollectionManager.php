@@ -11,6 +11,5 @@ namespace Luxury\Constants\Events;
  */
 final class CollectionManager
 {
-    const SPACE            = 'collectionManager';
     const AFTER_INITIALIZE = 'collectionManager:afterInitialize';
 }

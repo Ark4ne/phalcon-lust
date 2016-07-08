@@ -11,7 +11,6 @@ namespace Luxury\Constants\Events;
  */
 final class Dispatch
 {
-    const SPACE                   = 'dispatch';
     const BEFORE_DISPATCH_LOOP    = 'dispatch:beforeDispatchLoop';
     const BEFORE_DISPATCH         = 'dispatch:beforeDispatch';
     const BEFORE_NOT_FOUND_ACTION = 'dispatch:beforeNotFoundAction';

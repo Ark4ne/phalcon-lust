@@ -11,7 +11,6 @@ namespace Luxury\Constants\Events;
  */
 final class Db
 {
-    const SPACE                = 'db';
     const BEFORE_QUERY         = 'db:beforeQuery';
     const AFTER_QUERY          = 'db:afterQuery';
     const BEGIN_TRANSACTION    = 'db:beginTransaction';

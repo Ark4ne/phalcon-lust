@@ -11,7 +11,6 @@ namespace Luxury\Constants\Events;
  */
 final class View
 {
-    const SPACE              = 'view';
     const BEFORE_RENDER_VIEW = 'view:beforeRenderView';
     const AFTER_RENDER_VIEW  = 'view:afterRenderView';
     const NOT_FOUND_VIEW     = 'view:notFoundView';

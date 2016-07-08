@@ -11,6 +11,5 @@ namespace Luxury\Constants\Events;
  */
 final class ModelsManager
 {
-    const SPACE            = 'modelsManager';
     const AFTER_INITIALIZE = 'modelsManager:afterInitialize';
 }

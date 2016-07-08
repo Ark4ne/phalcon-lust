@@ -11,7 +11,6 @@ namespace Luxury\Constants\Events;
  */
 final class Model
 {
-    const SPACE                       = 'model';
     const NOT_DELETED                 = 'model:notDeleted';
     const NOT_SAVED                   = 'model:notSaved';
     const ON_VALIDATION_FAILS         = 'model:onValidationFails';

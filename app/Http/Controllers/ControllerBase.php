@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use Phalcon\Mvc\Controller;
+use Luxury\Foundation\Controller;
 use Phalcon\Mvc\View;
 
 /**
@@ -12,8 +12,23 @@ use Phalcon\Mvc\View;
  */
 class ControllerBase extends Controller
 {
+    /**
+     * Controller initialization.
+     *
+     * Called just before the action method.
+     */
     public function initialize()
     {
         $this->view->setRenderLevel(View::LEVEL_ACTION_VIEW);
+    }
+
+    /**
+     * Event called on controller construction
+     *
+     * Register middleware here.
+     */
+    protected function onConstruct()
+    {
+        ;
     }
 }

@@ -10,6 +10,7 @@ namespace Luxury\Constants;
 final class Services
 {
     const ANNOTATIONS         = 'annotations';
+    const APPLICATION         = 'application';
     const ASSETS              = 'assets';
     const AUTH                = 'auth';
     const CONFIG              = 'config';

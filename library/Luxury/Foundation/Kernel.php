@@ -66,14 +66,7 @@ abstract class Kernel implements KernelInterface
     public function registerMiddlewares(Application $app)
     {
         foreach ($this->middlewares as $middleware) {
-            /* @var \Luxury\Middleware\Middleware $middleware */
-            $middleware = new $middleware;
-
-            $middleware->setDI($app->getDI());
-
-            $middleware->setEventsManager($app->getEventsManager());
-
-            $middleware->attach();
+            $app->attachMiddleware(new $middleware);
         }
     }
 }

@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Constants\Services;
 use App\Facades\SomeApi;
+use Luxury\Middleware\Wtf as WtfMiddleware;
 
 /**
  * Class IndexController
@@ -12,6 +13,13 @@ use App\Facades\SomeApi;
  */
 class IndexController extends ControllerBase
 {
+    protected function onConstruct()
+    {
+        parent::onConstruct();
+
+        $this->middleware(new WtfMiddleware());
+    }
+
     public function indexAction()
     {
         // Call SomeApi using DependencyInjection

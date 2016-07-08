@@ -108,6 +108,14 @@ abstract class RoutesTestCase extends FuncTestCase
                 $this->assertEquals($value, $params[$key]);
             }
         }
+
+        $dispatcher = $this->app->dispatcher;
+
+        $dispatcher->setNamespaceName('App\Http\Controllers');
+        $dispatcher->setControllerName($controller);
+        $dispatcher->setActionName($action);
+
+        $dispatcher->dispatch();
     }
 
     /**

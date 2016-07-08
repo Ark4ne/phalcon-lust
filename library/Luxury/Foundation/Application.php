@@ -5,6 +5,7 @@ namespace Luxury\Foundation;
 use Luxury\Constants\Services;
 use Luxury\Error\Handler as ErrorHandler;
 use Luxury\Interfaces\Kernel;
+use Luxury\Middleware\Middleware;
 use Luxury\Support\Facades\Facade;
 
 use Phalcon\Di;
@@ -65,7 +66,10 @@ class Application extends PhalconApp
 
         $di = new DependencyInjection;
 
+        $di->setShared('app', $this);
+
         $di->setInternalEventsManager($em);
+
         $di->setShared(Services::EVENTS_MANAGER, $em);
 
         // Register Global Di
@@ -84,5 +88,25 @@ class Application extends PhalconApp
     private function setKernel(Kernel $kernel)
     {
         $this->kernel = $kernel;
+    }
+
+    /**
+     * Attach a Middleware
+     *
+     * @param Middleware $middleware
+     *
+     * @throws \Exception
+     */
+    public function attachMiddleware(Middleware $middleware)
+    {
+        if(is_null($middleware)){
+            throw new \Exception; // TODO
+        }
+
+        $middleware->setDI($this->getDI());
+
+        $middleware->setEventsManager($this->getEventsManager());
+
+        $middleware->attach();
     }
 }

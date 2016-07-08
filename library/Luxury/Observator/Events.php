@@ -6,7 +6,7 @@ use Luxury\Foundation\Application;
 use Luxury\Support\Facades\Log;
 use Phalcon\Di;
 use Phalcon\Events\Event as PhEvent;
-use Luxury\Constants\Events as EventList;
+use Luxury\Constants\Events as EventSpaces;
 
 /**
  * Class Events
@@ -58,7 +58,7 @@ class Events
      */
     public static function observeAll(Application $app)
     {
-        $reflection = new \ReflectionClass(EventList::class);
+        $reflection = new \ReflectionClass(EventSpaces::class);
 
         $constants = $reflection->getConstants();
 

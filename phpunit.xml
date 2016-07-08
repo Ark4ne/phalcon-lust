@@ -13,4 +13,10 @@
   <testsuite name="Phalcon - Testsuite">
     <directory>./tests/</directory>
   </testsuite>
+  <filter>
+    <whitelist processUncoveredFilesFromWhitelist="true">
+      <directory suffix=".php">./app</directory>
+      <directory suffix=".php">./library</directory>
+    </whitelist>
+  </filter>
 </phpunit>

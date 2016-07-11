@@ -22,7 +22,7 @@ abstract class Middleware extends Injectable
      *
      * @var string[]
      */
-    protected $listen = [];
+    protected $listen;
 
     /**
      * List to space to listen.
@@ -35,7 +35,7 @@ abstract class Middleware extends Injectable
      *
      * @var string[]
      */
-    protected $space = [];
+    protected $space;
 
     /**
      * Attach all require event to make the middleware
@@ -44,12 +44,16 @@ abstract class Middleware extends Injectable
     {
         $em = $this->getEventsManager();
 
-        foreach ($this->space as $space) {
-            $em->attach($space, $this);
+        if (!empty($this->space)) {
+            foreach ($this->space as $space) {
+                $em->attach($space, $this);
+            }
         }
 
-        foreach ($this->listen as $event => $callback) {
-            $em->attach($event, [$this, $callback]);
+        if (!empty($this->listen)) {
+            foreach ($this->listen as $event => $callback) {
+                $em->attach($event, [$this, $callback]);
+            }
         }
     }
 }

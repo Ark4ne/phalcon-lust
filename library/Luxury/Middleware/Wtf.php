@@ -27,8 +27,6 @@ class Wtf extends Middleware
      */
     public function beforeExecuteRoute(Event $event, $handler)
     {
-        Log::alert(__METHOD__);
-
-        throw new \Exception;
+        Log::debug(__METHOD__);
     }
 }

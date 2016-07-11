@@ -26,6 +26,6 @@ class Throttle extends ControllerMiddleware implements BeforeMiddleware
      */
     public function before($event, $source, $data = null)
     {
-        Log::notice(__METHOD__);
+        Log::debug(__METHOD__);
     }
 }

@@ -96,6 +96,11 @@ class Kernel extends KernelCore implements KernelInterface
             'action'     => 'index'
         ]);
 
+        $router->addGet($base . 'forward', [
+            'controller' => 'index',
+            'action'     => 'forward'
+        ]);
+
         $router->addPost($base . 'auth/login', [
             'controller' => 'auth',
             'action'     => 'login'

@@ -22,7 +22,6 @@ class Debug extends Middleware
     public function beforeHandleRequest(Event $event, $handler)
     {
         Log::debug('application:beforeHandleRequest : handler : ' . get_class($handler));
-        Log::debug($event);
     }
 
     /**
@@ -33,8 +32,7 @@ class Debug extends Middleware
      */
     public function beforeDispatchLoop(Event $event, $handler)
     {
-        Log::debug('application:beforeHandleRequest : handler : ' . get_class($handler));
-        Log::debug($event);
+        Log::debug('dispatcher:beforeDispatchLoop : handler : ' . get_class($handler));
     }
 
     /**
@@ -45,8 +43,7 @@ class Debug extends Middleware
      */
     public function beforeDispatch(Event $event, $handler)
     {
-        Log::debug('application:beforeHandleRequest : handler : ' . get_class($handler));
-        Log::debug($event);
+        Log::debug('dispatcher:beforeDispatch : handler : ' . get_class($handler));
     }
 
     /**
@@ -57,8 +54,7 @@ class Debug extends Middleware
      */
     public function beforeExecuteRoute(Event $event, $handler)
     {
-        Log::debug('application:beforeHandleRequest : handler : ' . get_class($handler));
-        Log::debug($event);
+        Log::debug('dispatcher:beforeExecuteRoute : handler : ' . get_class($handler));
     }
 
     /**
@@ -69,8 +65,7 @@ class Debug extends Middleware
      */
     public function afterInitialize(Event $event, $handler)
     {
-        Log::debug('application:beforeHandleRequest : handler : ' . get_class($handler));
-        Log::debug($event);
+        Log::debug('dispatcher:afterInitialize : handler : ' . get_class($handler));
     }
 
     /**
@@ -81,8 +76,7 @@ class Debug extends Middleware
      */
     public function afterExecuteRoute(Event $event, $handler)
     {
-        Log::debug('application:beforeHandleRequest : handler : ' . get_class($handler));
-        Log::debug($event);
+        Log::debug('dispatcher:afterExecuteRoute : handler : ' . get_class($handler));
     }
 
     /**
@@ -93,8 +87,7 @@ class Debug extends Middleware
      */
     public function afterDispatch(Event $event, $handler)
     {
-        Log::debug('application:beforeHandleRequest : handler : ' . get_class($handler));
-        Log::debug($event);
+        Log::debug('dispatcher:afterDispatch : handler : ' . get_class($handler));
     }
 
     /**
@@ -105,8 +98,7 @@ class Debug extends Middleware
      */
     public function afterDispatchLoop(Event $event, $handler)
     {
-        Log::debug('application:beforeHandleRequest : handler : ' . get_class($handler));
-        Log::debug($event);
+        Log::debug('dispatcher:afterDispatchLoop : handler : ' . get_class($handler));
     }
 
     /**
@@ -117,7 +109,6 @@ class Debug extends Middleware
      */
     public function afterHandleRequest(Event $event, $handler)
     {
-        Log::debug('application:beforeHandleRequest : handler : ' . get_class($handler));
-        Log::debug($event);
+        Log::debug('application:afterHandleRequest : handler : ' . get_class($handler));
     }
 }

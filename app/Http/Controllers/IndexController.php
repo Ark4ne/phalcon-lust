@@ -13,6 +13,13 @@ use Luxury\Middleware\Wtf as WtfMiddleware;
  */
 class IndexController extends ControllerBase
 {
+    protected function onConstruct()
+    {
+        parent::onConstruct();
+
+        $this->middleware(new WtfMiddleware());
+    }
+
     public function indexAction()
     {
         // Call SomeApi using DependencyInjection
@@ -22,6 +29,14 @@ class IndexController extends ControllerBase
         SomeApi::doAnotherThing();
 
         $this->view->content = "Some Content";
+    }
+
+    public function forwardAction()
+    {
+        $this->dispatcher->forward([
+            'controller' => 'index',
+            'action'     => 'index'
+        ]);
     }
 }
 

@@ -2,7 +2,9 @@
 
 namespace Luxury\Middleware;
 
+use Luxury\Support\Facades\Log;
 use Phalcon\Di\Injectable;
+use Phalcon\Events\Event;
 
 /**
  * Class Contract
@@ -37,6 +39,11 @@ abstract class Middleware extends Injectable
      */
     protected $space;
 
+    public function __construct()
+    {
+        Log::debug('initialization:' . get_class($this));
+    }
+
     /**
      * Attach all require event to make the middleware
      */
@@ -52,7 +59,11 @@ abstract class Middleware extends Injectable
 
         if (!empty($this->listen)) {
             foreach ($this->listen as $event => $callback) {
-                $em->attach($event, [$this, $callback]);
+                $closure = function (Event $event, $handler, $data = null) use ($callback) {
+                    $this->$callback($event, $handler, $data);
+                };
+
+                $em->attach($event, \Closure::bind($closure, $this));
             }
         }
     }

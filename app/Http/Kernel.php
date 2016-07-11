@@ -4,6 +4,7 @@ namespace App\Http;
 
 use Luxury\Foundation\Kernel as KernelCore;
 use Luxury\Interfaces\Kernel as KernelInterface;
+use Luxury\Middleware\Debug as DebugMiddleware;
 use Luxury\Middleware\Throttle as ThrottleMiddleware;
 use Luxury\Providers\Auth as AuthProvider;
 use Luxury\Providers\Config as ConfigProvider;
@@ -71,6 +72,7 @@ class Kernel extends KernelCore implements KernelInterface
      * @var string[]
      */
     protected $middlewares = [
+        DebugMiddleware::class,
         ThrottleMiddleware::class
     ];
 

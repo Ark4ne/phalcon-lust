@@ -4,28 +4,25 @@ namespace Luxury\Middleware;
 
 use Luxury\Constants\Events as EventSpaces;
 use Luxury\Support\Facades\Log;
-use Phalcon\Events\Event;
 
 /**
  * Class Throttle
  *
  * @package     Luxury\Middleware
  */
-class Throttle extends Middleware
+class Throttle extends MiddlewareController implements BeforeMiddleware
 {
-    protected $space = [
-        EventSpaces::DISPATCH
-    ];
-
     /**
-     * Event : dispatcher:beforeExecuteRoute
+     * Called before the execution of handler
      *
-     * @param \Phalcon\Events\Event $event
-     * @param mixed                 $handler
+     * @param \Phalcon\Events\Event|mixed $event
+     * @param \Phalcon\Dispatcher|mixed   $source
+     * @param mixed|null                  $data
      *
+     * @throws \Exception
      * @return bool
      */
-    public function beforeExecuteRoute(Event $event, $handler)
+    public function before($event, $source, $data = null)
     {
         Log::notice(__METHOD__);
     }

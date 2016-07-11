@@ -5,7 +5,7 @@ namespace App\Http;
 use Luxury\Foundation\Kernel as KernelCore;
 use Luxury\Interfaces\Kernel as KernelInterface;
 use Luxury\Middleware\Debug as DebugMiddleware;
-use Luxury\Middleware\Throttle as ThrottleMiddleware;
+use Luxury\Http\Middleware\Throttle as ThrottleMiddleware;
 use Luxury\Providers\Auth as AuthProvider;
 use Luxury\Providers\Config as ConfigProvider;
 use Luxury\Providers\Database as DatabaseProvider;

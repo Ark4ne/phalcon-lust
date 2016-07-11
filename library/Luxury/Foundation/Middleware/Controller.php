@@ -1,12 +1,15 @@
 <?php
 
-namespace Luxury\Middleware;
+namespace Luxury\Foundation\Middleware;
 
 use Luxury\Constants\Events\Dispatch;
+use Luxury\Middleware\AfterMiddleware;
+use Luxury\Middleware\BeforeMiddleware;
+use Luxury\Middleware\Middleware;
 use Phalcon\Dispatcher;
 use Phalcon\Events\Event;
 
-abstract class MiddlewareController extends Middleware
+abstract class Controller extends Middleware
 {
     protected $listen = [
         Dispatch::BEFORE_EXECUTE_ROUTE => 'beforeExecuteRoute',

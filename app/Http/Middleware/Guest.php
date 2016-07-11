@@ -3,13 +3,12 @@
 namespace App\Http\Middleware;
 
 use Luxury\Middleware\BeforeMiddleware;
-use Luxury\Middleware\MiddlewareController;
+use Luxury\Foundation\Middleware\Controller as ControllerMiddleware;
 use Luxury\Support\Facades\Auth;
 use Phalcon\Http\Client\Exception;
 
-class Guest extends MiddlewareController implements BeforeMiddleware
+class Guest extends ControllerMiddleware implements BeforeMiddleware
 {
-
     /**
      * Called before the execution of handler
      *

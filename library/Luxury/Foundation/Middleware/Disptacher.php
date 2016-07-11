@@ -1,8 +1,11 @@
 <?php
 
-namespace Luxury\Middleware;
+namespace Luxury\Foundation\Middleware;
 
 use Luxury\Constants\Events\Dispatch;
+use Luxury\Middleware\AfterMiddleware;
+use Luxury\Middleware\BeforeMiddleware;
+use Luxury\Middleware\Middleware;
 use Phalcon\Events\Event;
 
 /**
@@ -10,7 +13,7 @@ use Phalcon\Events\Event;
  *
  * @package Luxury\Middleware
  */
-abstract class MiddlewareDisptacher extends Middleware
+abstract class Disptacher extends Middleware
 {
     protected $listen = [
         Dispatch::BEFORE_EXECUTE_ROUTE => 'beforeDispatch',

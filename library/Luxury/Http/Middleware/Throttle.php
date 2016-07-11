@@ -1,8 +1,10 @@
 <?php
 
-namespace Luxury\Middleware;
+namespace Luxury\Http\Middleware;
 
 use Luxury\Constants\Events as EventSpaces;
+use Luxury\Foundation\Middleware\Controller as ControllerMiddleware;
+use Luxury\Middleware\BeforeMiddleware;
 use Luxury\Support\Facades\Log;
 
 /**
@@ -10,7 +12,7 @@ use Luxury\Support\Facades\Log;
  *
  * @package     Luxury\Middleware
  */
-class Throttle extends MiddlewareController implements BeforeMiddleware
+class Throttle extends ControllerMiddleware implements BeforeMiddleware
 {
     /**
      * Called before the execution of handler

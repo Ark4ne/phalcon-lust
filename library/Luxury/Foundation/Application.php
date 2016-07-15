@@ -99,10 +99,6 @@ class Application extends PhalconApp
      */
     public function attachMiddleware(Middleware $middleware)
     {
-        if(is_null($middleware)){
-            throw new \Exception; // TODO
-        }
-
         $middleware->setDI($this->getDI());
 
         $middleware->setEventsManager($this->getEventsManager());

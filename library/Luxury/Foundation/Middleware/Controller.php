@@ -5,40 +5,21 @@ namespace Luxury\Foundation\Middleware;
 use Luxury\Constants\Events\Dispatch;
 use Luxury\Middleware\AfterMiddleware;
 use Luxury\Middleware\BeforeMiddleware;
+use Luxury\Middleware\FinishMiddleware;
 use Luxury\Middleware\Middleware;
-use Phalcon\Dispatcher;
-use Phalcon\Events\Event;
 
 abstract class Controller extends Middleware
 {
-    protected $listen = [
-        Dispatch::BEFORE_EXECUTE_ROUTE => 'beforeExecuteRoute',
-        Dispatch::AFTER_EXECUTE_ROUTE  => 'afterExecuteRoute',
-    ];
-
-    /**
-     * Event called before the controller execution
-     *
-     * @param Event      $event
-     * @param Dispatcher $handler
-     */
-    public function beforeExecuteRoute(Event $event, Dispatcher $handler)
+    public final function __construct()
     {
         if ($this instanceof BeforeMiddleware) {
-            $this->before($event, $handler);
+            $this->listen[Dispatch::BEFORE_EXECUTE_ROUTE] = 'before';
         }
-    }
-
-    /**
-     * Event called after the controller execution
-     *
-     * @param Event      $event
-     * @param Dispatcher $handler
-     */
-    public function afterExecuteRoute(Event $event, Dispatcher $handler)
-    {
         if ($this instanceof AfterMiddleware) {
-            $this->after($event, $handler);
+            $this->listen[Dispatch::AFTER_EXECUTE_ROUTE] = 'after';
+        }
+        if ($this instanceof FinishMiddleware) {
+            $this->listen[Dispatch::AFTER_EXECUTE_ROUTE] = 'finish';
         }
     }
 }

@@ -5,8 +5,9 @@ namespace Luxury\Foundation\Middleware;
 use Luxury\Constants\Events\Dispatch;
 use Luxury\Middleware\AfterMiddleware;
 use Luxury\Middleware\BeforeMiddleware;
+use Luxury\Middleware\FinishMiddleware;
+use Luxury\Middleware\InitMiddleware;
 use Luxury\Middleware\Middleware;
-use Phalcon\Events\Event;
 
 /**
  * Class DisptacherMiddleware
@@ -15,34 +16,19 @@ use Phalcon\Events\Event;
  */
 abstract class Disptacher extends Middleware
 {
-    protected $listen = [
-        Dispatch::BEFORE_EXECUTE_ROUTE => 'beforeDispatch',
-        Dispatch::AFTER_EXECUTE_ROUTE  => 'afterDispatch',
-    ];
-
-    /**
-     * Event : dispatcher:beforeDispatch
-     *
-     * @param \Phalcon\Events\Event $event
-     * @param mixed                 $handler
-     */
-    public function beforeDispatch(Event $event, $handler)
+    public final function __construct()
     {
-        if ($this instanceof BeforeMiddleware) {
-            $this->before($event, $handler);
+        if ($this instanceof InitMiddleware) {
+            $this->listen[Dispatch::BEFORE_DISPATCH_LOOP] = 'init';
         }
-    }
-
-    /**
-     * Event : dispatcher:afterDispatch
-     *
-     * @param Event $event
-     * @param mixed $handler
-     */
-    public function afterDispatch(Event $event, $handler)
-    {
+        if ($this instanceof BeforeMiddleware) {
+            $this->listen[Dispatch::BEFORE_DISPATCH] = 'before';
+        }
         if ($this instanceof AfterMiddleware) {
-            $this->after($event, $handler);
+            $this->listen[Dispatch::AFTER_DISPATCH] = 'after';
+        }
+        if ($this instanceof FinishMiddleware) {
+            $this->listen[Dispatch::AFTER_DISPATCH_LOOP] = 'finish';
         }
     }
 }

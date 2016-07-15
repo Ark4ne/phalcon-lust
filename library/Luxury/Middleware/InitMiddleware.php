@@ -3,16 +3,16 @@
 namespace Luxury\Middleware;
 
 /**
- * Interface AfterMiddleware
+ * Interface InitMiddleware
  *
  * @package Luxury\Middleware
  *
- * Middleware after handled
+ * Middleware finish handled
  */
-interface AfterMiddleware
+interface InitMiddleware
 {
     /**
-     * Called after the execution of handler
+     * Called on the initialization
      *
      * @param \Phalcon\Events\Event|mixed $event
      * @param \Phalcon\Dispatcher|mixed   $source
@@ -21,5 +21,5 @@ interface AfterMiddleware
      * @throws \Exception
      * @return bool
      */
-    public function after($event, $source, $data = null);
+    public function init($event, $source, $data = null);
 }

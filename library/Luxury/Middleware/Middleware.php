@@ -39,11 +39,6 @@ abstract class Middleware extends Injectable
      */
     protected $space;
 
-    public function __construct()
-    {
-        Log::debug('initialization:' . get_class($this));
-    }
-
     /**
      * Attach all require event to make the middleware
      */

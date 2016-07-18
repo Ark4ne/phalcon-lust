@@ -26,7 +26,7 @@ class MiddlewareTest extends \TestCase
         // GIVEN
         $middleware = new TestControllerMiddleware();
 
-        $this->app->attachMiddleware($middleware);
+        $this->app->attach($middleware);
 
         // WHEN
         $this->app->handle('/');
@@ -48,7 +48,7 @@ class MiddlewareTest extends \TestCase
         // GIVEN
         $middleware = new TestDispatchMiddleware();
 
-        $this->app->attachMiddleware($middleware);
+        $this->app->attach($middleware);
 
         // WHEN
         $this->app->handle('/');
@@ -70,7 +70,7 @@ class MiddlewareTest extends \TestCase
         // GIVEN
         $middleware = new TestApplicationMiddleware();
 
-        $this->app->attachMiddleware($middleware);
+        $this->app->attach($middleware);
 
         // WHEN
         $this->app->handle('/');
@@ -87,7 +87,6 @@ class MiddlewareTest extends \TestCase
         $this->assertEquals(0, count($middleware->getView('finish')));
     }
 }
-
 
 class TestControllerMiddleware extends ControllerMiddleware implements
     TestListenable,

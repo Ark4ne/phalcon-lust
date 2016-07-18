@@ -2,6 +2,7 @@
 
 namespace App\Providers;
 
+use App\Api\SomeApi;
 use App\Constants\Services;
 use Luxury\Interfaces\Providable;
 use Phalcon\DiInterface;
@@ -24,7 +25,7 @@ class SomeApiServices implements Providable
          * Register the service of "SomeApi"
          */
         $di->setShared(Services::SOME_API, function () {
-            $api = new \App\Api\SomeApi();
+            $api = new SomeApi();
 
             $api->setDI($this);
 

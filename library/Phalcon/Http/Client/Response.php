@@ -25,7 +25,14 @@ namespace Phalcon\Http\Client;
  */
 class Response
 {
+    /**
+     * @var string
+     */
     public $body = '';
+
+    /**
+     * @var null|\Phalcon\Http\Client\Header
+     */
     public $header = null;
 
     /**

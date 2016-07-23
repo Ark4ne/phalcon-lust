@@ -64,7 +64,7 @@ class Curl extends Request
      */
     public function __clone()
     {
-        $request = new self;
+        $request         = new self;
         $request->handle = curl_copy_handle($this->handle);
 
         return $request;
@@ -295,6 +295,32 @@ class Curl extends Request
     /**
      * @param       $uri
      * @param array $params
+     * @param array $customHeader
+     * @param bool  $fullResponse
+     *
+     * @return \Phalcon\Http\Client\Response
+     * @throws \Phalcon\Http\Client\Exception
+     */
+    public function patch($uri, $params = [], $customHeader = [], $fullResponse = false)
+    {
+        $uri = $this->resolveUri($uri);
+
+        if (!empty($params)) {
+            $uri->extendQuery($params);
+        }
+
+        $this->setOptions([
+            CURLOPT_URL           => $uri->build(),
+            CURLOPT_HTTPGET       => true,
+            CURLOPT_CUSTOMREQUEST => Method::PATCH,
+        ]);
+
+        return $this->send($customHeader, $fullResponse);
+    }
+
+    /**
+     * @param       $uri
+     * @param array $params
      * @param bool  $useEncoding
      * @param array $customHeader
      * @param bool  $fullResponse
@@ -302,7 +328,8 @@ class Curl extends Request
      * @return \Phalcon\Http\Client\Response
      * @throws \Phalcon\Http\Client\Exception
      */
-    public function post($uri, $params = [], $useEncoding = true, $customHeader = [], $fullResponse = false)
+    public function post($uri, $params = [], $useEncoding = true, $customHeader = [],
+                         $fullResponse = false)
     {
         $this->setOptions([
             CURLOPT_URL           => $this->resolveUri($uri),
@@ -325,7 +352,8 @@ class Curl extends Request
      * @return \Phalcon\Http\Client\Response
      * @throws \Phalcon\Http\Client\Exception
      */
-    public function put($uri, $params = [], $useEncoding = true, $customHeader = [], $fullResponse = false)
+    public function put($uri, $params = [], $useEncoding = true, $customHeader = [],
+                        $fullResponse = false)
     {
         $this->setOptions([
             CURLOPT_URL           => $this->resolveUri($uri),

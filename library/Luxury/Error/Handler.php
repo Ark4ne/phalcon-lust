@@ -57,7 +57,7 @@ class Handler
         }
 
         set_error_handler(function ($errno, $errstr, $errfile, $errline) {
-            if (! ($errno & error_reporting())) {
+            if (!($errno & error_reporting())) {
                 return;
             }
 
@@ -86,7 +86,7 @@ class Handler
         });
 
         register_shutdown_function(function () {
-            if (! is_null($options = error_get_last())) {
+            if (!is_null($options = error_get_last())) {
                 static::handle(new Error($options));
             }
         });
@@ -171,13 +171,15 @@ class Handler
                     /* @var \Phalcon\Http\Response $response */
                     $response = $di->getShared(Services::RESPONSE);
 
+                    $dispatcher->setNamespaceName($config['namespace']);
                     $dispatcher->setControllerName($config['controller']);
                     $dispatcher->setActionName($config['action']);
                     $dispatcher->setParams(['error' => $error]);
 
                     $view->start();
                     $dispatcher->dispatch();
-                    $view->render($config['controller'], $config['action'], $dispatcher->getParams());
+                    $view->render($config['controller'], $config['action'],
+                        $dispatcher->getParams());
                     $view->finish();
 
                     return $response->setContent($view->getContent())->send();

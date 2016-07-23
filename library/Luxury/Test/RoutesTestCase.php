@@ -20,11 +20,6 @@ abstract class RoutesTestCase extends FuncTestCase
     private static $testedRoutes = [];
 
     /**
-     * @return array[]
-     */
-    protected abstract function routes();
-
-    /**
      * @return array
      */
     public function routesProvider()
@@ -56,8 +51,8 @@ abstract class RoutesTestCase extends FuncTestCase
         $expected,
         $controller = null,
         $action = null,
-        array $params = null)
-    {
+        array $params = null
+    ) {
         // GIVEN
         $di = $this->getDI();
         /** @var \Phalcon\Mvc\Router $router */
@@ -90,7 +85,7 @@ abstract class RoutesTestCase extends FuncTestCase
         foreach ($controls as $key => $controller) {
             $key = 'get' . $key . 'Name';
 
-            if (! $expected || ($expected && ! is_null($controller))) {
+            if (!$expected || ($expected && !is_null($controller))) {
                 $this->assertEquals($controller, $router->$key());
             } elseif ($expected) {
                 $this->assertTrue(is_string($router->$key()));
@@ -142,7 +137,7 @@ abstract class RoutesTestCase extends FuncTestCase
      */
     public function testRoutesTested($route = null)
     {
-        if (! array_key_exists($route->getPattern(), self::$testedRoutes)) {
+        if (!array_key_exists($route->getPattern(), self::$testedRoutes)) {
             $this->markTestIncomplete('Route "' . $route->getPattern() . '" has not been testing');
 
             return;
@@ -154,6 +149,11 @@ abstract class RoutesTestCase extends FuncTestCase
             $this->routeToArray(self::$testedRoutes[$route->getPattern()])
         );
     }
+
+    /**
+     * @return array[]
+     */
+    abstract protected function routes();
 
     /**
      * @param \Phalcon\Mvc\Router\RouteInterface $route

@@ -18,8 +18,11 @@ class Config implements Providable
      */
     public function register(DiInterface $di)
     {
-        $di->setShared(Services::CONFIG, function () {
-            return new \Phalcon\Config\Adapter\Php(APP_PATH . '/config/config.php');
-        });
+        $di->setShared(
+            Services::CONFIG,
+            function () {
+                return new \Phalcon\Config\Adapter\Php(APP_PATH . '/config/config.php');
+            }
+        );
     }
 }

@@ -1,6 +1,7 @@
 <?php
 
 namespace Luxury\Foundation;
+
 use Luxury\Middleware\Middleware;
 
 /**
@@ -17,7 +18,7 @@ abstract class Controller extends \Phalcon\Mvc\Controller
      *
      * Register middleware here.
      */
-    protected abstract function onConstruct();
+    abstract protected function onConstruct();
 
     /**
      * Attach a middleware
@@ -26,6 +27,6 @@ abstract class Controller extends \Phalcon\Mvc\Controller
      */
     protected function middleware(Middleware $middleware)
     {
-        $this->app->attach($middleware);
+        $this->app->attachMiddleware($middleware);
     }
 }

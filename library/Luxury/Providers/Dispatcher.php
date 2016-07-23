@@ -19,21 +19,26 @@ class Dispatcher implements Providable
      */
     public function register(DiInterface $di)
     {
-        $di->setShared(Services::DISPATCHER, function () {
-            /* @var \Phalcon\Di $this */
-            $dispatcher = new \Phalcon\Mvc\Dispatcher();
+        $di->setShared(
+            Services::DISPATCHER,
+            function () {
+                /* @var \Phalcon\Di $this */
+                $dispatcher = new \Phalcon\Mvc\Dispatcher();
 
-            // Create an events manager
-            $eventsManager = $this->getShared(Services::EVENTS_MANAGER);
+                // Create an events manager
+                $eventsManager = $this->getShared(Services::EVENTS_MANAGER);
 
-            // Listen for events produced in the dispatcher using the Security plugin
-            $eventsManager->attach('dispatch:beforeExecuteRoute',
-                $this->getShared(Services::SECURITY));
+                // Listen for events produced in the dispatcher using the Security plugin
+                $eventsManager->attach(
+                    'dispatch:beforeExecuteRoute',
+                    $this->getShared(Services::SECURITY)
+                );
 
-            // Assign the events manager to the dispatcher
-            $dispatcher->setEventsManager($eventsManager);
+                // Assign the events manager to the dispatcher
+                $dispatcher->setEventsManager($eventsManager);
 
-            return $dispatcher;
-        });
+                return $dispatcher;
+            }
+        );
     }
 }

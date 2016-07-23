@@ -37,7 +37,7 @@ abstract class TestCase extends UnitTestCase implements InjectionAwareInterface
     /**
      * @var Application
      */
-    protected static $_app;
+    protected static $appGlobal;
 
     /**
      * This method is called before a test is executed.
@@ -56,19 +56,19 @@ abstract class TestCase extends UnitTestCase implements InjectionAwareInterface
     /**
      * @return string
      */
-    protected abstract function kernel();
+    abstract protected function kernel();
 
     /**
      * @return \Luxury\Foundation\Application
      */
     protected function globalApp()
     {
-        if (self::$_app == null) {
-            self::$_app = new \Luxury\Foundation\Application();
-            self::$_app->make($this->kernel());
+        if (self::$appGlobal == null) {
+            self::$appGlobal = new \Luxury\Foundation\Application();
+            self::$appGlobal->make($this->kernel());
         }
 
-        return self::$_app;
+        return self::$appGlobal;
     }
 
     protected function tearDown()

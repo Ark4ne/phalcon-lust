@@ -20,5 +20,4 @@ class View extends Facade
     {
         return Services::VIEW;
     }
-
 }

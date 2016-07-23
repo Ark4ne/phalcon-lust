@@ -22,9 +22,14 @@ class Logger implements Providable
      */
     public function register(DiInterface $di)
     {
-        $di->setShared(Services::LOGGER, function () {
-            /* @var \Phalcon\Di $this */
-            return new \Phalcon\Logger\Adapter\File\Multiple($this->getShared(Services::CONFIG)->application->logDir);
-        });
+        $di->setShared(
+            Services::LOGGER,
+            function () {
+                /* @var \Phalcon\Di $this */
+                return new \Phalcon\Logger\Adapter\File\Multiple(
+                    $this->getShared(Services::CONFIG)->application->logDir
+                );
+            }
+        );
     }
 }

@@ -16,7 +16,10 @@ use Luxury\Middleware\Middleware;
  */
 abstract class Disptacher extends Middleware
 {
-    public final function __construct()
+    /**
+     * DisptacherMiddleware constructor.
+     */
+    final public function __construct()
     {
         if ($this instanceof InitMiddleware) {
             $this->listen[Dispatch::BEFORE_DISPATCH_LOOP] = 'init';

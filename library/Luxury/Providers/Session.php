@@ -22,20 +22,26 @@ class Session implements Providable
      */
     public function register(DiInterface $di)
     {
-        $di->setShared(Services::SESSION, function () {
-            /* @var \Phalcon\Di $this */
-            /* @var \Phalcon\Session\Adapter|\Phalcon\Session\AdapterInterface $session */
-            $class = 'Phalcon\Session\Adapter\\' . $this->getShared(Services::CONFIG)->session->adapter;
-            try {
-                $session = new $class();
-            } catch (\Exception $e) {
-                throw new SessionAdapterNotFound($e);
-            }
-            
-            $session->start();
+        $di->setShared(
+            Services::SESSION,
+            function () {
+                /* @var \Phalcon\Di $this */
+                /* @var \Phalcon\Session\Adapter|\Phalcon\Session\AdapterInterface $session */
+                $class =
+                    'Phalcon\Session\Adapter\\' . $this->getShared(
+                        Services::CONFIG
+                    )->session->adapter;
+                try {
+                    $session = new $class();
+                } catch (\Exception $e) {
+                    throw new SessionAdapterNotFound($e);
+                }
 
-            return $session;
-        });
+                $session->start();
+
+                return $session;
+            }
+        );
 
         $di->set(Services::SESSION_BAG, \Phalcon\Session\Bag::class);
     }

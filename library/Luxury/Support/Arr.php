@@ -79,12 +79,11 @@ final class Arr
         $results = [];
 
         foreach ($array as $values) {
-            if (! static::accessible($values)) {
+            if (!static::accessible($values)) {
                 continue;
             }
 
-            $results = array_merge($results, /*$values instanceof Collection ? $values->all() :*/
-                $values);
+            $results = array_merge($results, $values);
         }
 
         return $results;
@@ -303,8 +302,8 @@ final class Arr
 
         $keys = explode('.', $key);
         foreach ($keys as $segment) {
-            if ((! is_array($array) || ! array_key_exists($segment, $array)) &&
-                (! $array instanceof ArrayAccess || ! $array->offsetExists($segment))
+            if ((!is_array($array) || !array_key_exists($segment, $array)) &&
+                (!$array instanceof ArrayAccess || !$array->offsetExists($segment))
             ) {
                 return Obj::value($default);
             }
@@ -334,7 +333,7 @@ final class Arr
         }
 
         foreach (explode('.', $key) as $segment) {
-            if (! is_array($array) || ! array_key_exists($segment, $array)) {
+            if (!is_array($array) || !array_key_exists($segment, $array)) {
                 return false;
             }
 
@@ -469,7 +468,7 @@ final class Arr
             // If the key doesn't exist at this depth, we will just create an empty array
             // to hold the next value, allowing us to create the arrays to hold final
             // values at the correct depth. Then we'll keep digging into the array.
-            if (! isset($array[$key]) || ! is_array($array[$key])) {
+            if (!isset($array[$key]) || !is_array($array[$key])) {
                 $array[$key] = [];
             }
 

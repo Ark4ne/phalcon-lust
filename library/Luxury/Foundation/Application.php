@@ -4,11 +4,9 @@ namespace Luxury\Foundation;
 
 use Luxury\Constants\Services;
 use Luxury\Error\Handler as ErrorHandler;
-use Luxury\Events\Listener;
 use Luxury\Interfaces\Kernel;
 use Luxury\Middleware\Middleware;
 use Luxury\Support\Facades\Facade;
-
 use Phalcon\Di;
 use Phalcon\Di\FactoryDefault as DependencyInjection;
 use Phalcon\Di\Service;
@@ -56,21 +54,6 @@ class Application extends PhalconApp
         $this->kernel->registerRoutes($this);
     }
 
-    /**
-     * Attach an Event Listener
-     *
-     * @param Listener $listener
-     *
-     * @throws \Exception
-     */
-    public function attach(Listener $listener)
-    {
-        $listener->setDI($this->getDI());
-
-        $listener->setEventsManager($this->getEventsManager());
-
-        $listener->attach();
-    }
 
     protected function bootstrap()
     {
@@ -104,5 +87,21 @@ class Application extends PhalconApp
     private function setKernel(Kernel $kernel)
     {
         $this->kernel = $kernel;
+    }
+
+    /**
+     * Attach a Middleware
+     *
+     * @param Middleware $middleware
+     *
+     * @throws \Exception
+     */
+    public function attachMiddleware(Middleware $middleware)
+    {
+        $middleware->setDI($this->getDI());
+
+        $middleware->setEventsManager($this->getEventsManager());
+
+        $middleware->attach();
     }
 }

@@ -19,5 +19,4 @@ class Flash extends Facade
     {
         return Services::FLASH;
     }
-
 }

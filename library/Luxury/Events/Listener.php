@@ -49,7 +49,9 @@ abstract class Listener extends Injectable
         if (!empty($this->listen)) {
             foreach ($this->listen as $event => $callback) {
                 if (!method_exists($this, $callback)) {
-                    throw new \RuntimeException("Method '$callback' not exist in " . get_class($this));
+                    throw new \RuntimeException(
+                        "Method '$callback' not exist in " . get_class($this)
+                    );
                 }
 
                 $closure = function (Event $event, $handler, $data = null) use ($callback) {

@@ -2,13 +2,10 @@
 
 namespace Luxury\Observator;
 
-
 use Luxury\Foundation\Application;
-
 use Luxury\Support\Facades\Log;
 use Phalcon\Di;
 use Phalcon\Events\Event;
-
 
 /**
  * Class Events
@@ -152,10 +149,17 @@ class Events
             $em = $app->getEventsManager();
 
             Log::info('OEvent:observe:' . $name);
-            $em->attach($name, function (Event $event, $handler) {
-                Log::info('OEvent:observe:raised' . get_class($event->getSource()) . ':' . $event->getType());
-                Events::$raised[] = $event;
-            });
+            $em->attach(
+                $name,
+                function (Event $event, $handler) {
+                    Log::info(
+                        'OEvent:observe:raised' . get_class(
+                            $event->getSource()
+                        ) . ':' . $event->getType()
+                    );
+                    Events::$raised[] = $event;
+                }
+            );
 
             self::$logged[$name] = true;
         }

@@ -8,9 +8,19 @@ use Luxury\Middleware\BeforeMiddleware;
 use Luxury\Middleware\FinishMiddleware;
 use Luxury\Middleware\Middleware;
 
+/**
+ * ControllerMiddleware
+ *
+ * Class Controller
+ *
+ * @package Luxury\Foundation\Middleware
+ */
 abstract class Controller extends Middleware
 {
-    public final function __construct()
+    /**
+     * ControllerMiddleware constructor.
+     */
+    final public function __construct()
     {
         if ($this instanceof BeforeMiddleware) {
             $this->listen[Dispatch::BEFORE_EXECUTE_ROUTE] = 'before';

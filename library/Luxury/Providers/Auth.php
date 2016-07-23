@@ -21,8 +21,11 @@ class Auth implements Providable
      */
     public function register(DiInterface $di)
     {
-        $di->setShared(Services::AUTH, function () {
-            return new \Luxury\Auth\AuthManager();
-        });
+        $di->setShared(
+            Services::AUTH,
+            function () {
+                return new \Luxury\Auth\AuthManager();
+            }
+        );
     }
 }

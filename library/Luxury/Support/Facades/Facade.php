@@ -4,8 +4,8 @@ namespace Luxury\Support\Facades;
 
 use Mockery;
 use Mockery\MockInterface;
-use RuntimeException;
 use Phalcon\DiInterface;
+use RuntimeException;
 
 /**
  * Class Facade
@@ -92,7 +92,7 @@ abstract class Facade
     {
         $instance = static::getFacadeRoot();
 
-        if (! $instance) {
+        if (!$instance) {
             throw new RuntimeException('A facade root has not been set.');
         }
 

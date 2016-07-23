@@ -27,48 +27,54 @@ use Phalcon\Http\Response\StatusCode;
  */
 class Header implements \Countable
 {
-    private $fields = [];
-    public $version = '1.0';
-    public $statusCode = 0;
-    public $statusMessage = '';
-    public $status = '';
-
     const BUILD_STATUS = 1;
     const BUILD_FIELDS = 2;
+    public  $version       = '1.0';
+    public  $statusCode    = 0;
+    public  $statusMessage = '';
+    public  $status        = '';
+    private $fields        = [];
 
     /**
      * @param string $name
      * @param string $value
+     *
      * @return $this
      */
     public function set($name, $value)
     {
         $this->fields[$name] = $value;
+
         return $this;
     }
 
     /**
      * @param array $fields
+     *
      * @return $this
      */
     public function setMultiple(array $fields)
     {
         $this->fields = $fields;
+
         return $this;
     }
 
     /**
      * @param array $fields
+     *
      * @return $this
      */
     public function addMultiple(array $fields)
     {
         $this->fields = array_combine($this->fields, $fields);
+
         return $this;
     }
 
     /**
      * @param string $name
+     *
      * @return mixed
      */
     public function get($name)
@@ -98,21 +104,25 @@ class Header implements \Countable
                 return true;
             }
         }
+
         return false;
     }
 
     /**
      * @param string $name
+     *
      * @return $this
      */
     public function remove($name)
     {
         unset($this->fields[$name]);
+
         return $this;
     }
 
     /**
      * @param $content
+     *
      * @return bool
      */
     public function parse($content)
@@ -129,9 +139,9 @@ class Header implements \Countable
 
         $status = [];
         if (preg_match('%^HTTP/(\d(?:\.\d)?)\s+(\d{3})\s?+(.+)?$%i', $content[0], $status)) {
-            $this->status = array_shift($content);
-            $this->version = $status[1];
-            $this->statusCode = intval($status[2]);
+            $this->status        = array_shift($content);
+            $this->version       = $status[1];
+            $this->statusCode    = intval($status[2]);
             $this->statusMessage = isset($status[3]) ? $status[3] : '';
         }
 
@@ -150,6 +160,7 @@ class Header implements \Countable
 
     /**
      * @param int $flags
+     *
      * @return array|string
      */
     public function build($flags = 0)

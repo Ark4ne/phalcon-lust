@@ -31,7 +31,7 @@ use Phalcon\Http\Uri;
 abstract class Request
 {
     protected $baseUri;
-    public $header = null;
+    public    $header = null;
 
     const VERSION = '0.0.1';
 
@@ -41,7 +41,7 @@ abstract class Request
     public function __construct()
     {
         $this->baseUri = new Uri();
-        $this->header = new Header();
+        $this->header  = new Header();
     }
 
     /**

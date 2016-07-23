@@ -2,7 +2,6 @@
 
 namespace Luxury\Providers;
 
-
 use Luxury\Constants\Services;
 use Luxury\Interfaces\Providable;
 use Phalcon\DiInterface;

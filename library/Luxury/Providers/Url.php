@@ -20,12 +20,15 @@ class Url implements Providable
      */
     public function register(DiInterface $di)
     {
-        $di->setShared(Services::URL, function () {
-            /* @var \Phalcon\Di $this */
-            $url = new \Phalcon\Mvc\Url();
-            $url->setBaseUri($this->getShared(Services::CONFIG)->application->baseUri);
+        $di->setShared(
+            Services::URL,
+            function () {
+                /* @var \Phalcon\Di $this */
+                $url = new \Phalcon\Mvc\Url();
+                $url->setBaseUri($this->getShared(Services::CONFIG)->application->baseUri);
 
-            return $url;
-        });
+                return $url;
+            }
+        );
     }
 }

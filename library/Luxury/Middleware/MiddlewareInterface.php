@@ -1,6 +1,7 @@
 <?php
 
 namespace Luxury\Middleware;
+
 use Phalcon\Events\Event;
 
 /**

@@ -22,8 +22,8 @@ use Phalcon\Http\Client\Header;
 use Phalcon\Http\Client\Provider\Exception as ProviderException;
 use Phalcon\Http\Client\Request;
 use Phalcon\Http\Client\Response;
-use Phalcon\Http\Uri;
 use Phalcon\Http\Request\Method;
+use Phalcon\Http\Uri;
 
 /**
  * Class Stream
@@ -65,12 +65,14 @@ class Stream extends Request
 
     private function initOptions()
     {
-        $this->setOptions([
-            'user_agent'      => 'Phalcon HTTP/' . self::VERSION . ' (Stream)',
-            'follow_location' => 1,
-            'max_redirects'   => 20,
-            'timeout'         => 30
-        ]);
+        $this->setOptions(
+            [
+                'user_agent'      => 'Phalcon HTTP/' . self::VERSION . ' (Stream)',
+                'follow_location' => 1,
+                'max_redirects'   => 20,
+                'timeout'         => 30
+            ]
+        );
     }
 
     /**
@@ -154,11 +156,13 @@ class Stream extends Request
      */
     public function setProxy($host, $port = 8080, $user = null, $pass = null)
     {
-        $uri = new Uri([
-            'scheme' => 'tcp',
-            'host'   => $host,
-            'port'   => $port
-        ]);
+        $uri = new Uri(
+            [
+                'scheme' => 'tcp',
+                'host'   => $host,
+                'port'   => $port
+            ]
+        );
 
         if (!empty($user)) {
             $uri->user = $user;
@@ -184,10 +188,12 @@ class Stream extends Request
             $uri->extendQuery($params);
         }
 
-        $this->setOptions([
-            'method'  => Method::GET,
-            'content' => ''
-        ]);
+        $this->setOptions(
+            [
+                'method'  => Method::GET,
+                'content' => ''
+            ]
+        );
 
         $this->header->remove('Content-Type');
 
@@ -208,10 +214,12 @@ class Stream extends Request
             $uri->extendQuery($params);
         }
 
-        $this->setOptions([
-            'method'  => Method::HEAD,
-            'content' => ''
-        ]);
+        $this->setOptions(
+            [
+                'method'  => Method::HEAD,
+                'content' => ''
+            ]
+        );
 
         $this->header->remove('Content-Type');
 
@@ -232,10 +240,12 @@ class Stream extends Request
             $uri->extendQuery($params);
         }
 
-        $this->setOptions([
-            'method'  => Method::DELETE,
-            'content' => ''
-        ]);
+        $this->setOptions(
+            [
+                'method'  => Method::DELETE,
+                'content' => ''
+            ]
+        );
 
         $this->header->remove('Content-Type');
 

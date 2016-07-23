@@ -1,6 +1,7 @@
 <?php
 
 namespace Luxury\Test;
+
 use Luxury\Constants\Services;
 
 /**
@@ -10,42 +11,6 @@ use Luxury\Constants\Services;
  */
 abstract class FuncTestCase extends TestCase
 {
-
-    /**
-     * This method is called before a test is executed.
-     */
-    protected function setUp()
-    {
-        parent::setUp();
-    }
-
-    /**
-     * Ensures that each test has it's own DI and all globals are purged
-     *
-     * @return void
-     */
-    protected function tearDown()
-    {
-        $_SESSION = [];
-        $_GET     = [];
-        $_POST    = [];
-        $_COOKIE  = [];
-        $_REQUEST = [];
-        $_FILES   = [];
-        parent::tearDown();
-    }
-
-    /**
-     * Dispatches a given url and sets the response object accordingly
-     *
-     * @param  string $url The request url
-     *
-     * @return void
-     */
-    protected function dispatch($url)
-    {
-        $this->getDI()->setShared(Services::RESPONSE, $this->app->handle($url));
-    }
 
     /**
      * Assert that the last dispatched controller matches the given controller class name
@@ -105,7 +70,8 @@ abstract class FuncTestCase extends TestCase
     public function assertHeader(array $expected)
     {
         foreach ($expected as $expectedField => $expectedValue) {
-            $actualValue = $this->getDI()->getShared(Services::RESPONSE)->getHeaders()->get($expectedField);
+            $actualValue =
+                $this->getDI()->getShared(Services::RESPONSE)->getHeaders()->get($expectedField);
             if ($actualValue != $expectedValue) {
                 throw new \PHPUnit_Framework_ExpectationFailedException(
                     sprintf(
@@ -161,8 +127,10 @@ abstract class FuncTestCase extends TestCase
         $dispatcher = $this->getDI()->getShared(Services::DISPATCHER);
         $actual     = $dispatcher->wasForwarded();
 
-        if (! $actual) {
-            throw new \PHPUnit_Framework_ExpectationFailedException('Failed asserting dispatch was forwarded');
+        if (!$actual) {
+            throw new \PHPUnit_Framework_ExpectationFailedException(
+                'Failed asserting dispatch was forwarded'
+            );
         }
 
         $this->assertTrue($actual);
@@ -177,18 +145,23 @@ abstract class FuncTestCase extends TestCase
      */
     public function assertRedirectTo($location)
     {
-        $actualLocation = $this->getDI()->getShared(Services::RESPONSE)->getHeaders()->get('Location');
+        $actualLocation =
+            $this->getDI()->getShared(Services::RESPONSE)->getHeaders()->get('Location');
 
-        if (! $actualLocation) {
-            throw new \PHPUnit_Framework_ExpectationFailedException('Failed asserting response caused a redirect');
+        if (!$actualLocation) {
+            throw new \PHPUnit_Framework_ExpectationFailedException(
+                'Failed asserting response caused a redirect'
+            );
         }
 
         if ($actualLocation !== $location) {
-            throw new \PHPUnit_Framework_ExpectationFailedException(sprintf(
-                'Failed asserting response redirects to "%s". It redirects to "%s".',
-                $location,
-                $actualLocation
-            ));
+            throw new \PHPUnit_Framework_ExpectationFailedException(
+                sprintf(
+                    'Failed asserting response redirects to "%s". It redirects to "%s".',
+                    $location,
+                    $actualLocation
+                )
+            );
         }
 
         $this->assertEquals($location, $actualLocation);
@@ -212,5 +185,41 @@ abstract class FuncTestCase extends TestCase
     public function assertResponseContentContains($string)
     {
         $this->assertContains($string, $this->getContent());
+    }
+
+    /**
+     * This method is called before a test is executed.
+     */
+    protected function setUp()
+    {
+        parent::setUp();
+    }
+
+    /**
+     * Ensures that each test has it's own DI and all globals are purged
+     *
+     * @return void
+     */
+    protected function tearDown()
+    {
+        $_SESSION = [];
+        $_GET     = [];
+        $_POST    = [];
+        $_COOKIE  = [];
+        $_REQUEST = [];
+        $_FILES   = [];
+        parent::tearDown();
+    }
+
+    /**
+     * Dispatches a given url and sets the response object accordingly
+     *
+     * @param  string $url The request url
+     *
+     * @return void
+     */
+    protected function dispatch($url)
+    {
+        $this->getDI()->setShared(Services::RESPONSE, $this->app->handle($url));
     }
 }

@@ -18,14 +18,19 @@ class Flash implements Providable
      */
     public function register(DiInterface $di)
     {
-        $di->set(Services::FLASH, function () {
-            return new \Phalcon\Flash\Direct([
-                'error'   => 'alert alert-danger',
-                'success' => 'alert alert-success',
-                'notice'  => 'alert alert-info',
-                'warning' => 'alert alert-warning'
-            ]);
-        });
+        $di->set(
+            Services::FLASH,
+            function () {
+                return new \Phalcon\Flash\Direct(
+                    [
+                        'error'   => 'alert alert-danger',
+                        'success' => 'alert alert-success',
+                        'notice'  => 'alert alert-info',
+                        'warning' => 'alert alert-warning'
+                    ]
+                );
+            }
+        );
 
         $di->setShared(Services::FLASH_SESSION, \Phalcon\Flash\Session::class);
     }

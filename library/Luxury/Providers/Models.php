@@ -2,7 +2,6 @@
 
 namespace Luxury\Providers;
 
-
 use Luxury\Constants\Services;
 use Luxury\Interfaces\Providable;
 use Phalcon\DiInterface;
@@ -21,6 +20,9 @@ class Models implements Providable
     {
         $di->setShared(Services::MODELS_MANAGER, \Phalcon\Mvc\Model\Manager::class);
         $di->setShared(Services::MODELS_METADATA, \Phalcon\Mvc\Model\Metadata\Memory::class);
-        $di->setShared(Services::TRANSACTION_MANAGER, \Phalcon\Mvc\Model\Transaction\Manager::class);
+        $di->setShared(
+            Services::TRANSACTION_MANAGER,
+            \Phalcon\Mvc\Model\Transaction\Manager::class
+        );
     }
 }

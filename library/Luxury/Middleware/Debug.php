@@ -6,6 +6,11 @@ use Luxury\Constants\Events;
 use Luxury\Support\Facades\Log;
 use Phalcon\Events\Event;
 
+/**
+ * Class Debug
+ *
+ * @package Luxury\Middleware
+ */
 class Debug extends Middleware
 {
     protected $space = [

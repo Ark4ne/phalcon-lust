@@ -20,29 +20,38 @@ class View implements Providable
     {
         $di->setShared(Services::TAG, \Phalcon\Tag::class);
         $di->setShared(Services::ASSETS, \Phalcon\Assets\Manager::class);
-        $di->setShared(Services::VIEW, function () {
-            /* @var \Phalcon\Di $this */
+        $di->setShared(
+            Services::VIEW,
+            function () {
+                /* @var \Phalcon\Di $this */
 
-            $view = new \Phalcon\Mvc\View();
+                $view = new \Phalcon\Mvc\View();
 
-            $view->setViewsDir($this->getShared(Services::CONFIG)->application->viewsDir);
+                $view->setViewsDir($this->getShared(Services::CONFIG)->application->viewsDir);
 
-            $view->registerEngines([
-                '.volt'  => function ($view, $di) {
-                    /* @var \Phalcon\Di $di */
-                    $volt = new \Phalcon\Mvc\View\Engine\Volt($view, $di);
+                $view->registerEngines(
+                    [
+                        '.volt'  => function ($view, $di) {
+                            /* @var \Phalcon\Di $di */
+                            $volt = new \Phalcon\Mvc\View\Engine\Volt($view, $di);
 
-                    $volt->setOptions([
-                        'compiledPath'      => $di->getShared(Services::CONFIG)->application->cacheDir,
-                        'compiledSeparator' => '_'
-                    ]);
+                            $volt->setOptions(
+                                [
+                                    'compiledPath'      => $di->getShared(
+                                        Services::CONFIG
+                                    )->application->cacheDir,
+                                    'compiledSeparator' => '_'
+                                ]
+                            );
 
-                    return $volt;
-                },
-                '.phtml' => 'Phalcon\Mvc\View\Engine\Php'
-            ]);
+                            return $volt;
+                        },
+                        '.phtml' => 'Phalcon\Mvc\View\Engine\Php'
+                    ]
+                );
 
-            return $view;
-        });
+                return $view;
+            }
+        );
     }
 }

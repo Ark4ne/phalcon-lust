@@ -14,6 +14,9 @@ use Phalcon\Di\InjectionAwareInterface;
  */
 class SomeApi extends Injectable implements InjectionAwareInterface
 {
+    /**
+     * @return string
+     */
     public function doSomething()
     {
         // Use DependencyInjection
@@ -24,6 +27,9 @@ class SomeApi extends Injectable implements InjectionAwareInterface
         return 'abc';
     }
 
+    /**
+     * @return string
+     */
     public function doAnotherThing()
     {
         // Use Facade

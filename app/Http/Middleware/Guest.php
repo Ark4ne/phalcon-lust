@@ -2,11 +2,16 @@
 
 namespace App\Http\Middleware;
 
-use Luxury\Middleware\BeforeMiddleware;
 use Luxury\Foundation\Middleware\Controller as ControllerMiddleware;
+use Luxury\Middleware\BeforeMiddleware;
 use Luxury\Support\Facades\Auth;
 use Phalcon\Http\Client\Exception;
 
+/**
+ * Class Guest
+ *
+ * @package App\Http\Middleware
+ */
 class Guest extends ControllerMiddleware implements BeforeMiddleware
 {
     /**

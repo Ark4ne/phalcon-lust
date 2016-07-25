@@ -29,7 +29,7 @@ abstract class Controller extends Middleware
             $this->listen[Dispatch::AFTER_EXECUTE_ROUTE] = 'after';
         }
         if ($this instanceof FinishMiddleware) {
-            $this->listen[Dispatch::AFTER_EXECUTE_ROUTE] = 'finish';
+            $this->listen[Dispatch::AFTER_DISPATCH] = 'finish';
         }
     }
 }

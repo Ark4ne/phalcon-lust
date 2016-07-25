@@ -5,6 +5,11 @@ namespace Luxury\Events;
 use Phalcon\Di\Injectable;
 use Phalcon\Events\Event;
 
+/**
+ * Class Listener
+ *
+ * @package Luxury\Events
+ */
 abstract class Listener extends Injectable
 {
     /**

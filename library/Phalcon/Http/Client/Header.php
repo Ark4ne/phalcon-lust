@@ -29,11 +29,13 @@ class Header implements \Countable
 {
     const BUILD_STATUS = 1;
     const BUILD_FIELDS = 2;
-    public  $version       = '1.0';
-    public  $statusCode    = 0;
-    public  $statusMessage = '';
-    public  $status        = '';
-    private $fields        = [];
+    
+    public $version       = '1.0';
+    public $statusCode    = 0;
+    public $statusMessage = '';
+    public $status        = '';
+
+    private $fields = [];
 
     /**
      * @param string $name

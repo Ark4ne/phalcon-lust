@@ -2,7 +2,11 @@
 
 namespace Support;
 
-
+/**
+ * Class Middlewarize
+ *
+ * @package Support
+ */
 trait Middlewarize
 {
     /**

@@ -2,7 +2,7 @@
 
 namespace Luxury\Interfaces;
 
-use Luxury\Foundation\Application;
+use Phalcon\Application;
 
 /**
  * Interface KernelInterface
@@ -14,17 +14,17 @@ interface Kernel
     /**
      * Register the routes of the application.
      *
-     * @param \Phalcon\Mvc\Router $routes
-     * @param string              $baseUri
+     * @param \Phalcon\Mvc\Router|\Phalcon\Cli\Router $routes
+     * @param string                                  $baseUri
      *
      * @return void
      */
-    public function routes(\Phalcon\Mvc\Router $routes, $baseUri = '');
+    public function routes($routes, $baseUri = '');
 
     /**
      * Register the services.
      *
-     * @param \Luxury\Foundation\Application $app
+     * @params Application|Luxury\Foundation\Application\Contract  $app
      *
      * @return void
      */
@@ -33,7 +33,7 @@ interface Kernel
     /**
      * Register the routes.
      *
-     * @param \Luxury\Foundation\Application $app
+     * @params Application|Luxury\Foundation\Application\Contract  $app
      *
      * @return void
      */
@@ -42,7 +42,7 @@ interface Kernel
     /**
      * Register the middlewares.
      *
-     * @param \Luxury\Foundation\Application $app
+     * @params Application|Luxury\Foundation\Application\Contract  $app
      *
      * @return void
      */

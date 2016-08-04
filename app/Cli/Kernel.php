@@ -1,23 +1,17 @@
 <?php
 
-namespace App\Http;
+namespace App\Cli;
 
 use Luxury\Foundation\Kernel as KernelCore;
-use Luxury\Http\Middleware\Throttle as ThrottleMiddleware;
 use Luxury\Interfaces\Kernel as KernelInterface;
 use Luxury\Middleware\Debug as DebugMiddleware;
-use Luxury\Providers\Auth as AuthProvider;
+use Luxury\Providers\Cli\Dispatcher as DispatcherProvider;
+use Luxury\Providers\Cli\Router as RouterProvider;
 use Luxury\Providers\Config as ConfigProvider;
 use Luxury\Providers\Database as DatabaseProvider;
-use Luxury\Providers\Flash as FlashProvider;
-use Luxury\Providers\Http\Dispatcher as DispatcherProvider;
-use Luxury\Providers\Http\Router as RouterProvider;
 use Luxury\Providers\HttpClient as HttpClientProvider;
 use Luxury\Providers\Logger as LoggerProvider;
-use Luxury\Providers\Session as SessionProvider;
-use Luxury\Providers\Url as UrlProvider;
-use Luxury\Providers\View as ViewProvider;
-use Phalcon\Mvc\Router;
+use Phalcon\Cli\Router;
 
 /**
  * Class Kernel
@@ -37,11 +31,7 @@ class Kernel extends KernelCore implements KernelInterface
          */
         ConfigProvider::class,
         LoggerProvider::class,
-        UrlProvider::class,
-        FlashProvider::class,
-        SessionProvider::class,
         RouterProvider::class,
-        ViewProvider::class,
         DispatcherProvider::class,
         DatabaseProvider::class,
         /*
@@ -62,11 +52,6 @@ class Kernel extends KernelCore implements KernelInterface
         HttpClientProvider::class,
 
         /*
-         * Auth Service
-         */
-        AuthProvider::class,
-
-        /*
          * SomeApi Service
          */
         \App\Providers\SomeApiServices::class
@@ -78,8 +63,7 @@ class Kernel extends KernelCore implements KernelInterface
      * @var string[]
      */
     protected $middlewares = [
-        DebugMiddleware::class,
-        ThrottleMiddleware::class
+        DebugMiddleware::class
     ];
 
     /**
@@ -90,26 +74,5 @@ class Kernel extends KernelCore implements KernelInterface
      */
     public function routes($router, $base = '')
     {
-        $router->setDefaultNamespace('App\Http\Controllers');
-
-        $router->notFound([
-            'controller' => 'errors',
-            'action'     => 'http404'
-        ]);
-
-        $router->addGet($base, [
-            'controller' => 'index',
-            'action'     => 'index'
-        ]);
-
-        $router->addGet($base . 'forward', [
-            'controller' => 'index',
-            'action'     => 'forward'
-        ]);
-
-        $router->addPost($base . 'auth/login', [
-            'controller' => 'auth',
-            'action'     => 'login'
-        ]);
     }
 }

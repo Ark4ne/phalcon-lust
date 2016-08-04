@@ -12,13 +12,6 @@ use Luxury\Support\Facades\Auth;
  */
 class AuthController extends ControllerBase
 {
-    protected function onConstruct()
-    {
-        parent::onConstruct();
-
-        $this->middleware(new GuestMiddleware());
-    }
-
     /**
      * The Sign-in action.
      *
@@ -66,5 +59,12 @@ class AuthController extends ControllerBase
         ]);
 
         return;
+    }
+
+    protected function onConstruct()
+    {
+        parent::onConstruct();
+
+        $this->middleware(new GuestMiddleware());
     }
 }

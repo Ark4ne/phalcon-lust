@@ -77,11 +77,9 @@ class Multiple extends FileLogger implements AdapterInterface
      */
     public function logInternal($message, $type, $time, array $context = [])
     {
-        $filename =
-            $this->path . \DIRECTORY_SEPARATOR . $this->options['prefix'] . $this->getTypeString(
-                $type
-            ) . '.'
-            . $this->options['extension'];
+        $filename = $this->path . \DIRECTORY_SEPARATOR .
+                    $this->options['prefix'] . $this->getTypeString($type) . '.' .
+                    $this->options['extension'];
 
         $log    = $this->getFormatter()->format($message, $type, $time, $context);
         $result = file_put_contents($filename, $log, \FILE_APPEND);

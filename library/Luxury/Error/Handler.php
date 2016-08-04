@@ -75,7 +75,8 @@ class Handler
         );
 
         set_exception_handler(
-            function (\Exception $e) {
+            function ($e) {
+                /** @var \Error|\Exception $e */
                 $options = [
                     'type'        => $e->getCode(),
                     'message'     => $e->getMessage(),

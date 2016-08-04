@@ -7,22 +7,17 @@ use Luxury\Interfaces\Providable;
 use Phalcon\DiInterface;
 
 /**
- * Class Auth
+ * Class HttpClient
  *
  * @package     Luxury\Providers
  */
-class Auth implements Providable
+class HttpClient implements Providable
 {
-
     /**
      * @param \Phalcon\DiInterface $di
-     *
-     * @return void
      */
     public function register(DiInterface $di)
     {
-        $di->setShared(Services::AUTH, function () {
-            return new \Luxury\Auth\AuthManager();
-        });
+        $di->setShared(Services::HTTP_CLIENT, \Luxury\Http\Client::class);
     }
 }

@@ -27,6 +27,7 @@ return [
             'format'     => '[%date%][%type%] %message%',
             'dateFormat' => 'Y-m-d H:i:s O'
         ],
+        'namespace'  => 'App\Http\Controllers',
         'controller' => 'errors',
         'action'     => 'index',
     ]

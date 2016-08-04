@@ -1,6 +1,6 @@
 <?php
 
-namespace Luxury\Providers;
+namespace Luxury\Providers\Cli;
 
 use Luxury\Constants\Services;
 use Luxury\Interfaces\Providable;
@@ -19,15 +19,10 @@ class Router implements Providable
     public function register(DiInterface $di)
     {
         //Registering the Router
-        $di->setShared(
-            Services::ROUTER,
-            function () {
-                $router = new \Phalcon\Mvc\Router(false);
+        $di->setShared(Services::ROUTER, function () {
+            $router = new \Phalcon\Cli\Router(false);
 
-                $router->setUriSource(\Phalcon\Mvc\Router::URI_SOURCE_SERVER_REQUEST_URI);
-
-                return $router;
-            }
-        );
+            return $router;
+        });
     }
 }

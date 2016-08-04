@@ -3,6 +3,7 @@
 namespace Luxury\Foundation;
 
 use Luxury\Interfaces\Kernel as KernelInterface;
+use Phalcon\Application;
 
 /**
  * Class HttpKernel

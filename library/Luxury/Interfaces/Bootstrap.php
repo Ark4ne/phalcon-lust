@@ -2,7 +2,7 @@
 
 namespace Luxury\Interfaces;
 
-use Luxury\Foundation\Application;
+use Phalcon\Application;
 
 /**
  * Interface BootstrapInterface
@@ -12,7 +12,7 @@ use Luxury\Foundation\Application;
 interface Bootstrap
 {
     /**
-     * @param \Luxury\Foundation\Application $app
+     * @params Application|Luxury\Foundation\Application\Contract $app
      *
      * @return void
      */

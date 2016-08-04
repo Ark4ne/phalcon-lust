@@ -20,18 +20,15 @@ class Database implements Providable
      */
     public function register(DiInterface $di)
     {
-        $di->setShared(
-            Services::DB,
-            function () {
-                /* @var \Phalcon\Di $this */
-                $dbConfig = $this->getShared(Services::CONFIG)->database->toArray();
-                $adapter  = $dbConfig['adapter'];
-                unset($dbConfig['adapter']);
+        $di->setShared(Services::DB, function () {
+            /* @var \Phalcon\Di $this */
+            $dbConfig = $this->getShared(Services::CONFIG)->database->toArray();
+            $adapter  = $dbConfig['adapter'];
+            unset($dbConfig['adapter']);
 
-                $class = 'Phalcon\Db\Adapter\Pdo\\' . $adapter;
+            $class = 'Phalcon\Db\Adapter\Pdo\\' . $adapter;
 
-                return new $class($dbConfig);
-            }
-        );
+            return new $class($dbConfig);
+        });
     }
 }

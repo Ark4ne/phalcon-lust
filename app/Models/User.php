@@ -27,7 +27,6 @@ class User extends Model
      */
     public $email;
 
-
     /**
      * Returns table name mapped in the model.
      *

@@ -2,8 +2,9 @@
 
 namespace Luxury\Observator;
 
-use Luxury\Foundation\Application;
+use Luxury\Foundation\Application\Contract as ApplicationContract;
 use Luxury\Support\Facades\Log;
+use Phalcon\Application;
 use Phalcon\Di;
 use Phalcon\Events\Event;
 
@@ -127,9 +128,9 @@ class Events
     private static $logged = [];
 
     /**
-     * @param \Luxury\Foundation\Application $app
-     * @param string                         $space
-     * @param string|null                    $name
+     * @param Application|ApplicationContract $app
+     * @param string                          $space
+     * @param string|null                     $name
      */
     public static function observe(Application $app, $space, $name = null)
     {
@@ -166,7 +167,7 @@ class Events
     }
 
     /**
-     * @param \Luxury\Foundation\Application $app
+     * @param Application|ApplicationContract $app
      */
     public static function observeAll(Application $app)
     {

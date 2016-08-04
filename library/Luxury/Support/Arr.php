@@ -282,6 +282,28 @@ final class Arr
     }
 
     /**
+     * Get an item from an array.
+     *
+     * @param  array  $array
+     * @param  string $key
+     * @param  mixed  $default
+     *
+     * @return mixed
+     */
+    public static function fetch($array, $key, $default = null)
+    {
+        if (is_null($key)) {
+            return $default;
+        }
+
+        if (isset($array[$key])) {
+            return $array[$key];
+        }
+
+        return $default;
+    }
+
+    /**
      * Get an item from an array using "dot" notation.
      *
      * @param  \ArrayAccess|array $array
@@ -319,21 +341,24 @@ final class Arr
      *
      * @param  array  $array
      * @param  string $key
+     * @param bool    $exist
      *
      * @return bool
      */
-    public static function has($array, $key)
+    public static function has($array, $key, $exist = true)
     {
         if (empty($array) || is_null($key)) {
             return false;
         }
 
-        if (isset($array[$key]) || array_key_exists($key, $array)) {
+        if (isset($array[$key]) || ($exist && array_key_exists($key, $array))) {
             return true;
         }
 
         foreach (explode('.', $key) as $segment) {
-            if (!is_array($array) || !array_key_exists($segment, $array)) {
+            if (!is_array($array)
+                || ($exist ? !array_key_exists($segment, $array) : isset($array[$segment]))
+            ) {
                 return false;
             }
 

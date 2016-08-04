@@ -40,7 +40,7 @@ interface Authenticable
     /**
      * Set the token value for the "remember me" session.
      *
-     * @param string $value
+     * @param  string $value
      *
      * @return void
      */

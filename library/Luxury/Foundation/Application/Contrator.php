@@ -1,9 +1,8 @@
 <?php
 
-namespace Luxury\Foundation;
+namespace Luxury\Foundation\Application;
 
 use Luxury\Constants\Services;
-use Luxury\Error\Handler as ErrorHandler;
 use Luxury\Events\Listener;
 use Luxury\Interfaces\Kernel;
 use Luxury\Middleware\Middleware;
@@ -13,31 +12,18 @@ use Phalcon\Di\FactoryDefault as DependencyInjection;
 use Phalcon\Di\Service;
 use Phalcon\Events\Manager as EventsManager;
 use Phalcon\Loader;
-use Phalcon\Mvc\Application as PhalconApp;
 
 /**
- * Class Application
+ * Trait Contrator
  *
- * @package Luxury\Foundation
- * @property \stdClass|\Phalcon\Config config
+ * @package Luxury\Foundation\Application
  */
-class Application extends PhalconApp
+trait Contrator
 {
     /**
      * @var Kernel
      */
-    private $kernel;
-
-    /**
-     * Application constructor.
-     */
-    public function __construct()
-    {
-        ErrorHandler::register();
-
-        parent::__construct(null);
-    }
-
+    protected $kernel;
 
     /**
      * Construct Application
@@ -71,6 +57,22 @@ class Application extends PhalconApp
         $listener->attach();
     }
 
+    /**
+     * Attach a Middleware
+     *
+     * @param Middleware $middleware
+     *
+     * @throws \Exception
+     */
+    public function attachMiddleware(Middleware $middleware)
+    {
+        $middleware->setDI($this->getDI());
+
+        $middleware->setEventsManager($this->getEventsManager());
+
+        $middleware->attach();
+    }
+
     protected function bootstrap()
     {
         $em = new EventsManager;
@@ -79,7 +81,10 @@ class Application extends PhalconApp
 
         Di::reset();
 
-        $di = new DependencyInjection;
+        $di = $this->diClass;
+
+        /** @var Di $di */
+        $di = new $di;
 
         $di->setShared('app', $this);
 
@@ -103,21 +108,5 @@ class Application extends PhalconApp
     private function setKernel(Kernel $kernel)
     {
         $this->kernel = $kernel;
-    }
-
-    /**
-     * Attach a Middleware
-     *
-     * @param Middleware $middleware
-     *
-     * @throws \Exception
-     */
-    public function attachMiddleware(Middleware $middleware)
-    {
-        $middleware->setDI($this->getDI());
-
-        $middleware->setEventsManager($this->getEventsManager());
-
-        $middleware->attach();
     }
 }

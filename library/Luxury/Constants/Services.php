@@ -23,6 +23,7 @@ final class Services
     const FILTER              = 'filter';
     const FLASH               = 'flash';
     const FLASH_SESSION       = 'flashSession';
+    const HTTP_CLIENT         = 'httpClient';
     const LOGGER              = 'logger';
     const MODELS_MANAGER      = 'modelsManager';
     const MODELS_METADATA     = 'modelsMetadata';

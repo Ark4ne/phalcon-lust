@@ -5,19 +5,15 @@ $mem_get_usage_peak   = memory_get_peak_usage();
 $mem_get_usage_r      = memory_get_usage(true);
 $mem_get_usage_peak_r = memory_get_peak_usage(true);
 
-$tb_start = microtime(true);
-
 try {
     /**
      * Make Application
      *
-     * @var \Luxury\Foundation\Application $application
+     * @var \Luxury\Foundation\Application\Http $application
      */
     $application = require_once __DIR__ . '/../bootstrap/app.php';
 
     $application->make(App\Http\Kernel::class);
-
-    // \Luxury\Observator\Events::observeAll($application);
 
     /**
      * Handle the request
@@ -25,15 +21,6 @@ try {
     $response = $application->handle();
 
     $response->send();
-    /*
-        $events = \Luxury\Observator\Events::getRaised();
-
-        echo '<pre>';
-        foreach ($events as $event) {
-            echo get_class($event->getSource()) . ':' . $event->getType() . PHP_EOL;
-        }
-        echo '</pre>';
-    */
 } catch (\Exception $e) {
     echo $e->getMessage() . '<br>';
     echo '<pre>' . $e->getTraceAsString() . '</pre>';
@@ -48,7 +35,7 @@ $meminfo = json_encode([
     'mem:o:0'   => memory_get_usage(true) / 1024 . 'kb',
     'mem:p:i:0' => $mem_get_usage_peak_r / 1024 . 'kb',
     'mem:p:o:0' => memory_get_peak_usage(true) / 1024 . 'kb',
-    'time'      => microtime(true) - $tb_start
+    'time'      => microtime(true) - $_SERVER['REQUEST_TIME_FLOAT']
 ], JSON_PRETTY_PRINT);
 
 echo <<<HTML

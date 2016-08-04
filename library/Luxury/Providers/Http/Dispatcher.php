@@ -1,6 +1,6 @@
 <?php
 
-namespace Luxury\Providers;
+namespace Luxury\Providers\Http;
 
 use Luxury\Constants\Services;
 use Luxury\Interfaces\Providable;

@@ -72,20 +72,18 @@ class Curl extends Request
 
     private function initOptions()
     {
-        $this->setOptions(
-            [
-                CURLOPT_RETURNTRANSFER  => true,
-                CURLOPT_AUTOREFERER     => true,
-                CURLOPT_FOLLOWLOCATION  => true,
-                CURLOPT_MAXREDIRS       => 20,
-                CURLOPT_HEADER          => true,
-                CURLOPT_PROTOCOLS       => CURLPROTO_HTTP | CURLPROTO_HTTPS,
-                CURLOPT_REDIR_PROTOCOLS => CURLPROTO_HTTP | CURLPROTO_HTTPS,
-                CURLOPT_USERAGENT       => 'Phalcon HTTP/' . self::VERSION . ' (Curl)',
-                CURLOPT_CONNECTTIMEOUT  => 30,
-                CURLOPT_TIMEOUT         => 30
-            ]
-        );
+        $this->setOptions([
+            CURLOPT_RETURNTRANSFER  => true,
+            CURLOPT_AUTOREFERER     => true,
+            CURLOPT_FOLLOWLOCATION  => true,
+            CURLOPT_MAXREDIRS       => 20,
+            CURLOPT_HEADER          => true,
+            CURLOPT_PROTOCOLS       => CURLPROTO_HTTP | CURLPROTO_HTTPS,
+            CURLOPT_REDIR_PROTOCOLS => CURLPROTO_HTTP | CURLPROTO_HTTPS,
+            CURLOPT_USERAGENT       => 'Phalcon HTTP/' . self::VERSION . ' (Curl)',
+            CURLOPT_CONNECTTIMEOUT  => 30,
+            CURLOPT_TIMEOUT         => 30
+        ]);
     }
 
     /**
@@ -202,12 +200,10 @@ class Curl extends Request
      */
     public function setProxy($host, $port = 8080, $user = null, $pass = null)
     {
-        $this->setOptions(
-            [
-                CURLOPT_PROXY     => $host,
-                CURLOPT_PROXYPORT => $port
-            ]
-        );
+        $this->setOptions([
+            CURLOPT_PROXY     => $host,
+            CURLOPT_PROXYPORT => $port
+        ]);
 
         if (!empty($user) && is_string($user)) {
             $pair = $user;
@@ -235,13 +231,11 @@ class Curl extends Request
             $uri->extendQuery($params);
         }
 
-        $this->setOptions(
-            [
-                CURLOPT_URL           => $uri->build(),
-                CURLOPT_HTTPGET       => true,
-                CURLOPT_CUSTOMREQUEST => Method::GET,
-            ]
-        );
+        $this->setOptions([
+            CURLOPT_URL           => $uri->build(),
+            CURLOPT_HTTPGET       => true,
+            CURLOPT_CUSTOMREQUEST => Method::GET,
+        ]);
 
         return $this->send($customHeader, $fullResponse);
     }
@@ -263,13 +257,11 @@ class Curl extends Request
             $uri->extendQuery($params);
         }
 
-        $this->setOptions(
-            [
-                CURLOPT_URL           => $uri->build(),
-                CURLOPT_HTTPGET       => true,
-                CURLOPT_CUSTOMREQUEST => Method::HEAD,
-            ]
-        );
+        $this->setOptions([
+            CURLOPT_URL           => $uri->build(),
+            CURLOPT_HTTPGET       => true,
+            CURLOPT_CUSTOMREQUEST => Method::HEAD,
+        ]);
 
         return $this->send($customHeader, $fullResponse);
     }
@@ -291,13 +283,11 @@ class Curl extends Request
             $uri->extendQuery($params);
         }
 
-        $this->setOptions(
-            [
-                CURLOPT_URL           => $uri->build(),
-                CURLOPT_HTTPGET       => true,
-                CURLOPT_CUSTOMREQUEST => Method::DELETE,
-            ]
-        );
+        $this->setOptions([
+            CURLOPT_URL           => $uri->build(),
+            CURLOPT_HTTPGET       => true,
+            CURLOPT_CUSTOMREQUEST => Method::DELETE,
+        ]);
 
         return $this->send($customHeader, $fullResponse);
     }
@@ -319,13 +309,11 @@ class Curl extends Request
             $uri->extendQuery($params);
         }
 
-        $this->setOptions(
-            [
-                CURLOPT_URL           => $uri->build(),
-                CURLOPT_HTTPGET       => true,
-                CURLOPT_CUSTOMREQUEST => Method::PATCH,
-            ]
-        );
+        $this->setOptions([
+            CURLOPT_URL           => $uri->build(),
+            CURLOPT_HTTPGET       => true,
+            CURLOPT_CUSTOMREQUEST => Method::PATCH,
+        ]);
 
         return $this->send($customHeader, $fullResponse);
     }
@@ -347,13 +335,11 @@ class Curl extends Request
         $customHeader = [],
         $fullResponse = false
     ) {
-        $this->setOptions(
-            [
-                CURLOPT_URL           => $this->resolveUri($uri),
-                CURLOPT_POST          => true,
-                CURLOPT_CUSTOMREQUEST => Method::POST,
-            ]
-        );
+        $this->setOptions([
+            CURLOPT_URL           => $this->resolveUri($uri),
+            CURLOPT_POST          => true,
+            CURLOPT_CUSTOMREQUEST => Method::POST,
+        ]);
 
         $this->initPostFields($params, $useEncoding);
 
@@ -377,13 +363,11 @@ class Curl extends Request
         $customHeader = [],
         $fullResponse = false
     ) {
-        $this->setOptions(
-            [
-                CURLOPT_URL           => $this->resolveUri($uri),
-                CURLOPT_POST          => true,
-                CURLOPT_CUSTOMREQUEST => Method::PUT,
-            ]
-        );
+        $this->setOptions([
+            CURLOPT_URL           => $this->resolveUri($uri),
+            CURLOPT_POST          => true,
+            CURLOPT_CUSTOMREQUEST => Method::PUT,
+        ]);
 
         $this->initPostFields($params, $useEncoding);
 

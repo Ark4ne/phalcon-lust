@@ -31,7 +31,8 @@ use Phalcon\Http\Uri;
 abstract class Request
 {
     protected $baseUri;
-    public    $header = null;
+
+    public $header = null;
 
     const VERSION = '0.0.1';
 

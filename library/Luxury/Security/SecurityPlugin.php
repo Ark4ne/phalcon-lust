@@ -106,23 +106,19 @@ class SecurityPlugin extends Plugin
         $action     = $dispatcher->getActionName();
         $acl        = $this->getAcl();
         if (!$acl->isResource($controller)) {
-            $dispatcher->forward(
-                [
-                    'controller' => 'errors',
-                    'action'     => 'show404'
-                ]
-            );
+            $dispatcher->forward([
+                'controller' => 'errors',
+                'action'     => 'show404'
+            ]);
 
             return false;
         }
         $allowed = $acl->isAllowed($role, $controller, $action);
         if ($allowed != Acl::ALLOW) {
-            $dispatcher->forward(
-                [
-                    'controller' => 'errors',
-                    'action'     => 'show401'
-                ]
-            );
+            $dispatcher->forward([
+                'controller' => 'errors',
+                'action'     => 'show401'
+            ]);
             $this->session->destroy();
 
             return false;

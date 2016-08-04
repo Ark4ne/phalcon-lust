@@ -107,6 +107,20 @@ final class Str
     }
 
     /**
+     * Transliterate a UTF-8 value to ASCII.
+     *
+     * @param string $value
+     * @param string $escape
+     * @param string $escaper
+     *
+     * @return string
+     */
+    public static function escape($value, $escape, $escaper = '\\')
+    {
+        return str_replace($escape, $escaper . $escape, $value);
+    }
+
+    /**
      * Cap a string with a single instance of a given value.
      *
      * @param  string $value

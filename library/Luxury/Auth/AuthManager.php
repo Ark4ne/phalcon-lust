@@ -78,7 +78,6 @@ class AuthManager extends Injector
         return !$this->check();
     }
 
-
     /**
      * authenticate user
      *

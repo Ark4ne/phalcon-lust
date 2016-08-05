@@ -1,3 +1,4 @@
+#!/usr/bin/env php
 <?php
 /*
 $tb_mem_start        = memory_get_usage(true);

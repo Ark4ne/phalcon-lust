@@ -5,7 +5,7 @@ namespace App\Http;
 use App\Providers\SomeApiServices as SomeApiProvider;
 use Luxury\Foundation\Application\Http;
 use Luxury\Http\Middleware\Throttle as ThrottleMiddleware;
-use Luxury\Middleware\Debug as DebugMiddleware;
+use Luxury\Foundation\Middleware\Debug as DebugMiddleware;
 use Luxury\Providers\{
     Auth as AuthProvider,
     Config as ConfigProvider,

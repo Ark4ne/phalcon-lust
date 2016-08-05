@@ -4,7 +4,7 @@ namespace App\Cli;
 
 use App\Providers\SomeApiServices as SomeApiProvider;
 use Luxury\Foundation\Application\Cli;
-use Luxury\Middleware\Debug as DebugMiddleware;
+use Luxury\Foundation\Middleware\Debug as DebugMiddleware;
 use Luxury\Providers\{
     Cli\Dispatcher as DispatcherProvider,
     Cli\Router as RouterProvider,

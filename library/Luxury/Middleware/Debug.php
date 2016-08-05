@@ -1,8 +1,9 @@
 <?php
 
-namespace Luxury\Middleware;
+namespace Luxury\Foundation\Middleware;
 
 use Luxury\Constants\Events;
+use Luxury\Middleware\Middleware;
 use Luxury\Support\Facades\Log;
 use Phalcon\Events\Event;
 

@@ -54,5 +54,4 @@ class Router extends Facade
     {
         return Services::ROUTER;
     }
-
 }

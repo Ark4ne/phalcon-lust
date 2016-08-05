@@ -10,8 +10,8 @@ use Luxury\Support\Facades\Facade;
  *
  * @package App\Facades
  *
- * @method static void doSomething()
- * @method static void doAnotherThing()
+ * @method static string doSomething()
+ * @method static string doAnotherThing()
  */
 class SomeApi extends Facade
 {

@@ -56,40 +56,47 @@ class Handler
                 break;
         }
 
-        set_error_handler(function ($errno, $errstr, $errfile, $errline) {
-            if (! ($errno & error_reporting())) {
-                return;
-            }
+        set_error_handler(
+            function ($errno, $errstr, $errfile, $errline) {
+                if (!($errno & error_reporting())) {
+                    return;
+                }
 
-            $options = [
-                'type'    => $errno,
-                'message' => $errstr,
-                'file'    => $errfile,
-                'line'    => $errline,
-                'isError' => true,
-            ];
+                $options = [
+                    'type'    => $errno,
+                    'message' => $errstr,
+                    'file'    => $errfile,
+                    'line'    => $errline,
+                    'isError' => true,
+                ];
 
-            static::handle(new Error($options));
-        });
-
-        set_exception_handler(function (\Exception $e) {
-            $options = [
-                'type'        => $e->getCode(),
-                'message'     => $e->getMessage(),
-                'file'        => $e->getFile(),
-                'line'        => $e->getLine(),
-                'isException' => true,
-                'exception'   => $e,
-            ];
-
-            static::handle(new Error($options));
-        });
-
-        register_shutdown_function(function () {
-            if (! is_null($options = error_get_last())) {
                 static::handle(new Error($options));
             }
-        });
+        );
+
+        set_exception_handler(
+            function ($e) {
+                /** @var \Error|\Exception $e */
+                $options = [
+                    'type'        => $e->getCode(),
+                    'message'     => $e->getMessage(),
+                    'file'        => $e->getFile(),
+                    'line'        => $e->getLine(),
+                    'isException' => true,
+                    'exception'   => $e,
+                ];
+
+                static::handle(new Error($options));
+            }
+        );
+
+        register_shutdown_function(
+            function () {
+                if (!is_null($options = error_get_last())) {
+                    static::handle(new Error($options));
+                }
+            }
+        );
     }
 
     /**
@@ -171,13 +178,18 @@ class Handler
                     /* @var \Phalcon\Http\Response $response */
                     $response = $di->getShared(Services::RESPONSE);
 
+                    $dispatcher->setNamespaceName($config['namespace']);
                     $dispatcher->setControllerName($config['controller']);
                     $dispatcher->setActionName($config['action']);
                     $dispatcher->setParams(['error' => $error]);
 
                     $view->start();
                     $dispatcher->dispatch();
-                    $view->render($config['controller'], $config['action'], $dispatcher->getParams());
+                    $view->render(
+                        $config['controller'],
+                        $config['action'],
+                        $dispatcher->getParams()
+                    );
                     $view->finish();
 
                     return $response->setContent($view->getContent())->send();

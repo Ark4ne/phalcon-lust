@@ -2,20 +2,31 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Middleware\Guest as GuestMiddleware;
 use Luxury\Support\Facades\Auth;
 
 /**
  * Class AuthController
  *
- * @package     App\Http\Controllers
+ * @package App\Http\Controllers
  */
 class AuthController extends ControllerBase
 {
-
+    /**
+     * The Sign-in action.
+     *
+     * http://localhost/phalcon-lust/auth/signin
+     */
     public function signinAction()
     {
+        // Nothing here, implicit view used.
     }
 
+    /**
+     * The Login action.
+     *
+     * http://localhost/phalcon-lust/auth/login
+     */
     public function loginAction()
     {
         // Get the data from the user
@@ -48,5 +59,12 @@ class AuthController extends ControllerBase
         ]);
 
         return;
+    }
+
+    protected function onConstruct()
+    {
+        parent::onConstruct();
+
+        $this->middleware(new GuestMiddleware());
     }
 }

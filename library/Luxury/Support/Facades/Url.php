@@ -24,5 +24,4 @@ class Url extends Facade
     {
         return Services::URL;
     }
-
 }

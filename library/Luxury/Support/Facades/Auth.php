@@ -1,6 +1,7 @@
 <?php
 
 namespace Luxury\Support\Facades;
+
 use Luxury\Constants\Services;
 
 /**

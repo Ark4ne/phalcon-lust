@@ -20,5 +20,4 @@ class Response extends Facade
     {
         return Services::RESPONSE;
     }
-
 }

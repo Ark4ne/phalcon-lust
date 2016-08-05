@@ -26,7 +26,7 @@ class SecurityPlugin extends Plugin
      */
     public function getAcl()
     {
-        if (! isset($this->persistent->acl)) {
+        if (!isset($this->persistent->acl)) {
             $acl = new AclList();
             $acl->setDefaultAction(Acl::DENY);
             // Register roles
@@ -97,7 +97,7 @@ class SecurityPlugin extends Plugin
     public function beforeDispatch(Event $event, Dispatcher $dispatcher)
     {
         $auth = $this->session->get('auth');
-        if (! $auth) {
+        if (!$auth) {
             $role = 'Guests';
         } else {
             $role = 'Users';
@@ -105,7 +105,7 @@ class SecurityPlugin extends Plugin
         $controller = $dispatcher->getControllerName();
         $action     = $dispatcher->getActionName();
         $acl        = $this->getAcl();
-        if (! $acl->isResource($controller)) {
+        if (!$acl->isResource($controller)) {
             $dispatcher->forward([
                 'controller' => 'errors',
                 'action'     => 'show404'

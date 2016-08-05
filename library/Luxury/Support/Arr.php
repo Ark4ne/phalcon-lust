@@ -79,12 +79,11 @@ final class Arr
         $results = [];
 
         foreach ($array as $values) {
-            if (! static::accessible($values)) {
+            if (!static::accessible($values)) {
                 continue;
             }
 
-            $results = array_merge($results, /*$values instanceof Collection ? $values->all() :*/
-                $values);
+            $results = array_merge($results, $values);
         }
 
         return $results;
@@ -283,6 +282,28 @@ final class Arr
     }
 
     /**
+     * Get an item from an array.
+     *
+     * @param  array  $array
+     * @param  string $key
+     * @param  mixed  $default
+     *
+     * @return mixed
+     */
+    public static function fetch($array, $key, $default = null)
+    {
+        if (is_null($key)) {
+            return $default;
+        }
+
+        if (isset($array[$key])) {
+            return $array[$key];
+        }
+
+        return $default;
+    }
+
+    /**
      * Get an item from an array using "dot" notation.
      *
      * @param  \ArrayAccess|array $array
@@ -303,8 +324,8 @@ final class Arr
 
         $keys = explode('.', $key);
         foreach ($keys as $segment) {
-            if ((! is_array($array) || ! array_key_exists($segment, $array)) &&
-                (! $array instanceof ArrayAccess || ! $array->offsetExists($segment))
+            if ((!is_array($array) || !array_key_exists($segment, $array)) &&
+                (!$array instanceof ArrayAccess || !$array->offsetExists($segment))
             ) {
                 return Obj::value($default);
             }
@@ -320,21 +341,24 @@ final class Arr
      *
      * @param  array  $array
      * @param  string $key
+     * @param bool    $exist
      *
      * @return bool
      */
-    public static function has($array, $key)
+    public static function has($array, $key, $exist = true)
     {
         if (empty($array) || is_null($key)) {
             return false;
         }
 
-        if (isset($array[$key]) || array_key_exists($key, $array)) {
+        if (isset($array[$key]) || ($exist && array_key_exists($key, $array))) {
             return true;
         }
 
         foreach (explode('.', $key) as $segment) {
-            if (! is_array($array) || ! array_key_exists($segment, $array)) {
+            if (!is_array($array)
+                || ($exist ? !array_key_exists($segment, $array) : isset($array[$segment]))
+            ) {
                 return false;
             }
 
@@ -469,7 +493,7 @@ final class Arr
             // If the key doesn't exist at this depth, we will just create an empty array
             // to hold the next value, allowing us to create the arrays to hold final
             // values at the correct depth. Then we'll keep digging into the array.
-            if (! isset($array[$key]) || ! is_array($array[$key])) {
+            if (!isset($array[$key]) || !is_array($array[$key])) {
                 $array[$key] = [];
             }
 

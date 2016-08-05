@@ -35,8 +35,9 @@ class Obj
      */
     public static function read($object, $property, $default = null)
     {
-        if (is_null($object))
+        if (is_null($object)) {
             return self::value($default);
+        }
 
         if (isset($object->$property)) {
             return $object->$property;
@@ -64,7 +65,7 @@ class Obj
 
         while (($segment = array_shift($key)) !== null) {
             if ($segment === '*') {
-                if (! Arr::accessible($target)) {
+                if (!Arr::accessible($target)) {
                     return self::value($default);
                 }
 
@@ -74,13 +75,13 @@ class Obj
             }
 
             if (Arr::accessible($target)) {
-                if (! Arr::exists($target, $segment)) {
+                if (!Arr::exists($target, $segment)) {
                     return self::value($default);
                 }
 
                 $target = $target[$segment];
             } elseif (is_object($target)) {
-                if (! isset($target->{$segment})) {
+                if (!isset($target->{$segment})) {
                     return self::value($default);
                 }
 
@@ -108,7 +109,7 @@ class Obj
         $segments = is_array($key) ? $key : explode('.', $key);
 
         if (($segment = array_shift($segments)) === '*') {
-            if (! Arr::accessible($target)) {
+            if (!Arr::accessible($target)) {
                 $target = [];
             }
 
@@ -123,22 +124,22 @@ class Obj
             }
         } elseif (Arr::accessible($target)) {
             if ($segments) {
-                if (! Arr::exists($target, $segment)) {
+                if (!Arr::exists($target, $segment)) {
                     $target[$segment] = [];
                 }
 
                 self::set($target[$segment], $segments, $value, $overwrite);
-            } elseif ($overwrite || ! Arr::exists($target, $segment)) {
+            } elseif ($overwrite || !Arr::exists($target, $segment)) {
                 $target[$segment] = $value;
             }
         } elseif (is_object($target)) {
             if ($segments) {
-                if (! isset($target->{$segment})) {
+                if (!isset($target->{$segment})) {
                     $target->{$segment} = [];
                 }
 
                 self::set($target->{$segment}, $segments, $value, $overwrite);
-            } elseif ($overwrite || ! isset($target->{$segment})) {
+            } elseif ($overwrite || !isset($target->{$segment})) {
                 $target->{$segment} = $value;
             }
         }

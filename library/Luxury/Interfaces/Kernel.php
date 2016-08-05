@@ -2,6 +2,8 @@
 
 namespace Luxury\Interfaces;
 
+use Phalcon\Application;
+
 /**
  * Interface KernelInterface
  *
@@ -10,37 +12,23 @@ namespace Luxury\Interfaces;
 interface Kernel
 {
     /**
-     * Return the Services to load.
-     *
-     * @return string[]
-     */
-    public function providers();
-
-    /**
-     * Register the routes of the application.
-     *
-     * @param \Phalcon\Mvc\Router $routes
-     * @param string              $baseUri
+     * Register the services.
      *
      * @return void
      */
-    public function routes(\Phalcon\Mvc\Router $routes, $baseUri = '');
-
-    /**
-     * Register the services.
-     *
-     * @param \Phalcon\DiInterface $di
-     *
-     * @return \string[]
-     */
-    public function registerServices(\Phalcon\DiInterface $di);
+    public function registerServices();
 
     /**
      * Register the routes.
      *
-     * @param \Phalcon\DiInterface $di
-     *
-     * @return \string[]
+     * @return void
      */
-    public function registerRoutes(\Phalcon\DiInterface $di);
+    public function registerRoutes();
+
+    /**
+     * Register the middlewares.
+     *
+     * @return void
+     */
+    public function registerMiddlewares();
 }

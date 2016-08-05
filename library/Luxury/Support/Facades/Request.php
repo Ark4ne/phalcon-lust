@@ -20,5 +20,4 @@ class Request extends Facade
     {
         return Services::REQUEST;
     }
-
 }

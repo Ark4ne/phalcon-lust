@@ -10,6 +10,7 @@ namespace Luxury\Constants;
 final class Services
 {
     const ANNOTATIONS         = 'annotations';
+    const APPLICATION         = 'application';
     const ASSETS              = 'assets';
     const AUTH                = 'auth';
     const CONFIG              = 'config';
@@ -22,6 +23,7 @@ final class Services
     const FILTER              = 'filter';
     const FLASH               = 'flash';
     const FLASH_SESSION       = 'flashSession';
+    const HTTP_CLIENT         = 'httpClient';
     const LOGGER              = 'logger';
     const MODELS_MANAGER      = 'modelsManager';
     const MODELS_METADATA     = 'modelsMetadata';

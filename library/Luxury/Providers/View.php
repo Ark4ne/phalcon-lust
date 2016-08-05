@@ -4,6 +4,7 @@ namespace Luxury\Providers;
 
 use Luxury\Constants\Services;
 use Luxury\Interfaces\Providable;
+use Luxury\View\Engine\Extensions\PhpFunction as PhpFunctionExtension;
 use Phalcon\DiInterface;
 
 /**
@@ -36,6 +37,7 @@ class View implements Providable
                         'compiledPath'      => $di->getShared(Services::CONFIG)->application->cacheDir,
                         'compiledSeparator' => '_'
                     ]);
+                    $volt->getCompiler()->addExtension(new PhpFunctionExtension());
 
                     return $volt;
                 },

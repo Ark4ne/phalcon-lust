@@ -1,6 +1,8 @@
 <?php
 
-$loader = new \Phalcon\Loader();
+use Phalcon\Loader;
+
+$loader = new Loader();
 
 /**
  * Registery Namespaces directory

@@ -22,5 +22,4 @@ final class SessionAdapterNotFound extends Exception
     {
         \Exception::__construct("", 448, $previous);
     }
-
 }

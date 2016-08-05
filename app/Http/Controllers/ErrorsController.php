@@ -26,6 +26,6 @@ class ErrorsController extends ControllerBase
 
     public function http404Action()
     {
-
+        // Nothing here, implicit view used.
     }
 }

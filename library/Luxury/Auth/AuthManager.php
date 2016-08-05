@@ -57,7 +57,7 @@ class AuthManager extends Injector
             return null;
         }
 
-        if (! is_null($this->user)) {
+        if (!is_null($this->user)) {
             return $this->user;
         }
 
@@ -75,9 +75,8 @@ class AuthManager extends Injector
      */
     public function guest()
     {
-        return ! $this->check();
+        return !$this->check();
     }
-
 
     /**
      * authenticate user
@@ -88,12 +87,14 @@ class AuthManager extends Injector
      */
     public function attempt(array $credentials = [])
     {
-        $user = User::findFirst([
-            'email'    => Arr::get($credentials, 'email'),
-            'password' => Arr::get($credentials, 'password'),
-        ]);
+        $user = User::findFirst(
+            [
+                'email'    => Arr::get($credentials, 'email'),
+                'password' => Arr::get($credentials, 'password'),
+            ]
+        );
 
-        if (! is_null($user)) {
+        if (!is_null($user)) {
             $this->login($user);
 
             return $user;
@@ -109,7 +110,7 @@ class AuthManager extends Injector
      */
     public function check()
     {
-        return ! is_null($this->user());
+        return !is_null($this->user());
     }
 
     /**
@@ -142,8 +143,9 @@ class AuthManager extends Injector
      */
     public function login($user)
     {
-        if (! $user)
+        if (!$user) {
             return false;
+        }
 
         $this->regenerateSessionId();
 
@@ -193,5 +195,4 @@ class AuthManager extends Injector
     {
         return $this->config->session->id;
     }
-
 }

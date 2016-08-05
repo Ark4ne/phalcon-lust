@@ -18,11 +18,11 @@
 
 namespace Phalcon\Config;
 
+use Phalcon\Config;
 use Phalcon\Config\Adapter\Ini;
 use Phalcon\Config\Adapter\Json;
 use Phalcon\Config\Adapter\Php;
 use Phalcon\Config\Adapter\Yaml;
-use Phalcon\Config;
 
 /**
  * Phalcon config loader
@@ -60,7 +60,7 @@ class Loader
             case 'yaml':
                 return new Yaml($filePath);
             default:
-                throw new Exception('Config adapter for .'  . $extension . ' files is not support');
+                throw new Exception('Config adapter for .' . $extension . ' files is not support');
         }
     }
 }

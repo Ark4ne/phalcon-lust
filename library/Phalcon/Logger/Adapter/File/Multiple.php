@@ -2,10 +2,10 @@
 
 namespace Phalcon\Logger\Adapter\File;
 
-use Phalcon\Logger\Exception as LoggerException;
 use Phalcon\Logger as Logger;
 use Phalcon\Logger\Adapter\File as FileLogger;
 use Phalcon\Logger\AdapterInterface;
+use Phalcon\Logger\Exception as LoggerException;
 
 /**
  * Phalcon\Logger\Adapter\File\Multiple
@@ -47,11 +47,11 @@ class Multiple extends FileLogger implements AdapterInterface
     public function __construct($path, array $options = [])
     {
         $path = rtrim($path, ' ' . \DIRECTORY_SEPARATOR);
-        if (! file_exists($path) || ! is_dir($path)) {
+        if (!file_exists($path) || !is_dir($path)) {
             throw new LoggerException('Directory ' . $path . ' does not exist!');
         }
 
-        if (! is_writable($path)) {
+        if (!is_writable($path)) {
             throw new LoggerException('Directory ' . $path . ' is not writable!');
         }
 
@@ -77,8 +77,9 @@ class Multiple extends FileLogger implements AdapterInterface
      */
     public function logInternal($message, $type, $time, array $context = [])
     {
-        $filename = $this->path . \DIRECTORY_SEPARATOR . $this->options['prefix'] . $this->getTypeString($type) . '.'
-            . $this->options['extension'];
+        $filename = $this->path . \DIRECTORY_SEPARATOR .
+                    $this->options['prefix'] . $this->getTypeString($type) . '.' .
+                    $this->options['extension'];
 
         $log    = $this->getFormatter()->format($message, $type, $time, $context);
         $result = file_put_contents($filename, $log, \FILE_APPEND);

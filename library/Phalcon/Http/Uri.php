@@ -79,21 +79,21 @@ class Uri
 
     /**
      * @param $name
-     * @param $value
-     */
-    public function __set($name, $value)
-    {
-        $this->parts[$name] = $value;
-    }
-
-    /**
-     * @param $name
      *
      * @return mixed
      */
     public function __get($name)
     {
         return $this->parts[$name];
+    }
+
+    /**
+     * @param $name
+     * @param $value
+     */
+    public function __set($name, $value)
+    {
+        $this->parts[$name] = $value;
     }
 
     /**
@@ -111,7 +111,7 @@ class Uri
      */
     public function build()
     {
-        $uri = '';
+        $uri   = '';
         $parts = $this->parts;
 
         if (!empty($parts['scheme'])) {
@@ -207,8 +207,8 @@ class Uri
      */
     public function extendQuery($params)
     {
-        $query = empty($this->parts['query']) ? [] : $this->parts['query'];
-        $params = empty($params) ? [] : $params;
+        $query                = empty($this->parts['query']) ? [] : $this->parts['query'];
+        $params               = empty($params) ? [] : $params;
         $this->parts['query'] = array_merge($query, $params);
 
         return $this;

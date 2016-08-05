@@ -39,7 +39,7 @@ abstract class Listener extends Injectable
     protected $space;
 
     /**
-     * Attach all require event to make the middleware
+     * Attach all require event to make the listener
      */
     public function attach()
     {

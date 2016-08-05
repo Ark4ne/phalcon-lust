@@ -6,19 +6,20 @@ $mem_get_usage_r      = memory_get_usage(true);
 $mem_get_usage_peak_r = memory_get_peak_usage(true);
 
 try {
-    /**
-     * Make Application
-     *
-     * @var \Luxury\Foundation\Application\Http $application
-     */
+    /*--------------------------------------------------------------*/
+    /* Make Application                                             */
+    /*--------------------------------------------------------------*/
+
+    /** @var \Luxury\Foundation\Application $application */
     $application = require_once __DIR__ . '/../bootstrap/app.php';
 
-    $application->make(App\Http\Kernel::class);
+    /** @var \App\Http\Kernel $kernel */
+    $kernel = $application->make(App\Http\Kernel::class);
 
     /**
      * Handle the request
      */
-    $response = $application->handle();
+    $response = $kernel->handle();
 
     $response->send();
 } catch (\Exception $e) {

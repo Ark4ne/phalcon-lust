@@ -2,31 +2,45 @@
 
 namespace Luxury\Foundation\Application;
 
-use Luxury\Error\Handler as ErrorHandler;
-use Luxury\Foundation\Application\Contract as ApplicationContract;
+use Luxury\Foundation\Kernelize;
 use Phalcon\Mvc\Application;
+use Phalcon\Di\FactoryDefault as Di;
 
 /**
  * Class Http
  *
- * @package     Luxury\Foundation\Application
+ * @package Luxury\Foundation\Application
  */
-class Http extends Application implements ApplicationContract
+abstract class Http extends Application
 {
-    use Contrator;
+    use Kernelize;
 
     /**
+     * Return the Provider List to load.
+     *
+     * @var string[]
+     */
+    protected $providers = [];
+
+    /**
+     * Return the Middleware List to load.
+     *
+     * @var string[]
+     */
+    protected $middlewares = [];
+
+    /**
+     * The DependencyInjection class to use.
+     *
      * @var string
      */
-    protected $diClass = \Phalcon\Di\FactoryDefault::class;
+    protected $dependencyInjection = Di::class;
 
     /**
      * Application constructor.
      */
     public function __construct()
     {
-        ErrorHandler::register();
-
         parent::__construct(null);
     }
 }

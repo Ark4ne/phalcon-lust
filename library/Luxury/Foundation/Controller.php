@@ -9,7 +9,7 @@ use Luxury\Middleware\Middleware;
  *
  * @package Luxury\Foundation
  *
- * @property-read \Phalcon\Mvc\Application|\Luxury\Foundation\Application\Contract $app
+ * @property-read \Phalcon\Application|\Luxury\Foundation\Kernelize $app
  */
 abstract class Controller extends \Phalcon\Mvc\Controller
 {

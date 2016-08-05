@@ -1,19 +1,20 @@
 <?php
-
+/*
 $tb_mem_start        = memory_get_usage(true);
 $tb_mem_peak_start   = memory_get_peak_usage(true);
 $tb_mem_start_0      = memory_get_usage();
 $tb_mem_peak_start_0 = memory_get_peak_usage();
-
+*/
 try {
-    /**
-     * Make Application
-     *
-     * @var \Luxury\Foundation\Application\Http $application
-     */
-    $application = require_once __DIR__ . '/bootstrap/cli.php';
+    /*--------------------------------------------------------------*/
+    /* Make Application                                             */
+    /*--------------------------------------------------------------*/
 
-    $application->make(App\Cli\Kernel::class);
+    /** @var \Luxury\Foundation\Application $application */
+    $application = require_once __DIR__ . '/bootstrap/app.php';
+
+    /** @var \App\Cli\Kernel $kernel */
+    $kernel = $application->make(App\Cli\Kernel::class);
 
     /**
      * Process the console arguments
@@ -36,7 +37,7 @@ try {
     /**
      * Handle the request
      */
-    $application->handle($arguments);
+    $kernel->handle($arguments);
 
 } catch (\Exception $e) {
     echo $e->getMessage() . '<br>';
@@ -44,6 +45,7 @@ try {
     exit(255);
 }
 
+/*
 $meminfo = json_encode([
     'mem:i'     => $tb_mem_start / 1024 . 'kb',
     'mem:o'     => memory_get_usage(true) / 1024 . 'kb',
@@ -59,3 +61,4 @@ $meminfo = json_encode([
 echo <<<HTML
 <pre>{$meminfo}</pre>
 HTML;
+*/

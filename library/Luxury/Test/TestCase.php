@@ -2,7 +2,6 @@
 
 namespace Luxury\Test;
 
-use Luxury\Foundation\Application\Contract as ApplicationContract;
 use Mockery;
 use Phalcon\Application;
 use Phalcon\Config;
@@ -31,14 +30,24 @@ abstract class TestCase extends UnitTestCase implements InjectionAwareInterface
     protected $config;
 
     /**
-     * @var Application|ApplicationContract
+     * @var Application
      */
     protected $app;
 
     /**
-     * @var Application|ApplicationContract
+     * @var \Luxury\Foundation\Application
+     */
+    protected $lxApp;
+
+    /**
+     * @var Application
      */
     protected static $appGlobal;
+
+    /**
+     * @var \Luxury\Foundation\Application
+     */
+    protected static $lxAppGlobal;
 
     /**
      * This method is called before a test is executed.
@@ -50,8 +59,8 @@ abstract class TestCase extends UnitTestCase implements InjectionAwareInterface
         $this->checkExtension('phalcon');
 
         // Creating the application
-        $this->app = new \Luxury\Foundation\Application\Http();
-        $this->app->make($this->kernel());
+        $this->lxApp = new \Luxury\Foundation\Application();
+        $this->app   = $this->lxApp->make($this->kernel());
     }
 
     /**
@@ -60,13 +69,13 @@ abstract class TestCase extends UnitTestCase implements InjectionAwareInterface
     abstract protected function kernel();
 
     /**
-     * @return Application|ApplicationContract
+     * @return Application
      */
     protected function globalApp()
     {
         if (self::$appGlobal == null) {
-            self::$appGlobal = new \Luxury\Foundation\Application\Http();
-            self::$appGlobal->make($this->kernel());
+            self::$lxAppGlobal = new \Luxury\Foundation\Application();
+            self::$appGlobal   = self::$lxAppGlobal->make($this->kernel());
         }
 
         return self::$appGlobal;

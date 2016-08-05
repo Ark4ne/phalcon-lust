@@ -2,7 +2,6 @@
 
 namespace Luxury\Observator;
 
-use Luxury\Foundation\Application\Contract as ApplicationContract;
 use Luxury\Support\Facades\Log;
 use Phalcon\Application;
 use Phalcon\Di;
@@ -128,9 +127,9 @@ class Events
     private static $logged = [];
 
     /**
-     * @param Application|ApplicationContract $app
-     * @param string                          $space
-     * @param string|null                     $name
+     * @param Application $app
+     * @param string      $space
+     * @param string|null $name
      */
     public static function observe(Application $app, $space, $name = null)
     {
@@ -150,24 +149,21 @@ class Events
             $em = $app->getEventsManager();
 
             Log::info('OEvent:observe:' . $name);
-            $em->attach(
-                $name,
-                function (Event $event, $handler) {
-                    Log::info(
-                        'OEvent:observe:raised' . get_class(
-                            $event->getSource()
-                        ) . ':' . $event->getType()
-                    );
-                    Events::$raised[] = $event;
-                }
-            );
+            $em->attach($name, function (Event $event) {
+                Log::info(
+                    'OEvent:observe:raised' . get_class(
+                        $event->getSource()
+                    ) . ':' . $event->getType()
+                );
+                Events::$raised[] = $event;
+            });
 
             self::$logged[$name] = true;
         }
     }
 
     /**
-     * @param Application|ApplicationContract $app
+     * @param Application $app
      */
     public static function observeAll(Application $app)
     {

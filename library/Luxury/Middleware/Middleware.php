@@ -5,7 +5,7 @@ namespace Luxury\Middleware;
 use Luxury\Events\Listener;
 
 /**
- * Class Contract
+ * Class Middleware
  *
  * @package     Luxury\Middleware
  */

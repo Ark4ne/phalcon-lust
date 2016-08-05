@@ -2,15 +2,17 @@
 
 namespace App\Cli;
 
-use Luxury\Foundation\Kernel as KernelCore;
-use Luxury\Interfaces\Kernel as KernelInterface;
+use App\Providers\SomeApiServices as SomeApiProvider;
+use Luxury\Foundation\Application\Cli;
 use Luxury\Middleware\Debug as DebugMiddleware;
-use Luxury\Providers\Cli\Dispatcher as DispatcherProvider;
-use Luxury\Providers\Cli\Router as RouterProvider;
-use Luxury\Providers\Config as ConfigProvider;
-use Luxury\Providers\Database as DatabaseProvider;
-use Luxury\Providers\HttpClient as HttpClientProvider;
-use Luxury\Providers\Logger as LoggerProvider;
+use Luxury\Providers\{
+    Cli\Dispatcher as DispatcherProvider,
+    Cli\Router as RouterProvider,
+    Config as ConfigProvider,
+    Database as DatabaseProvider,
+    HttpClient as HttpClientProvider,
+    Logger as LoggerProvider
+};
 use Phalcon\Cli\Router;
 
 /**
@@ -18,7 +20,7 @@ use Phalcon\Cli\Router;
  *
  * @package App\Http\Controllers
  */
-class Kernel extends KernelCore implements KernelInterface
+class Kernel extends Cli
 {
     /**
      * Return the Provider List to load.
@@ -54,7 +56,7 @@ class Kernel extends KernelCore implements KernelInterface
         /*
          * SomeApi Service
          */
-        \App\Providers\SomeApiServices::class
+        SomeApiProvider::class
     ];
 
     /**

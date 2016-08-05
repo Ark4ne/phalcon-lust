@@ -2,21 +2,23 @@
 
 namespace App\Http;
 
-use Luxury\Foundation\Kernel as KernelCore;
+use App\Providers\SomeApiServices as SomeApiProvider;
+use Luxury\Foundation\Application\Http;
 use Luxury\Http\Middleware\Throttle as ThrottleMiddleware;
-use Luxury\Interfaces\Kernel as KernelInterface;
 use Luxury\Middleware\Debug as DebugMiddleware;
-use Luxury\Providers\Auth as AuthProvider;
-use Luxury\Providers\Config as ConfigProvider;
-use Luxury\Providers\Database as DatabaseProvider;
-use Luxury\Providers\Flash as FlashProvider;
-use Luxury\Providers\Http\Dispatcher as DispatcherProvider;
-use Luxury\Providers\Http\Router as RouterProvider;
-use Luxury\Providers\HttpClient as HttpClientProvider;
-use Luxury\Providers\Logger as LoggerProvider;
-use Luxury\Providers\Session as SessionProvider;
-use Luxury\Providers\Url as UrlProvider;
-use Luxury\Providers\View as ViewProvider;
+use Luxury\Providers\{
+    Auth as AuthProvider,
+    Config as ConfigProvider,
+    Database as DatabaseProvider,
+    Flash as FlashProvider,
+    Http\Dispatcher as DispatcherProvider,
+    Http\Router as RouterProvider,
+    HttpClient as HttpClientProvider,
+    Logger as LoggerProvider,
+    Session as SessionProvider,
+    Url as UrlProvider,
+    View as ViewProvider
+};
 use Phalcon\Mvc\Router;
 
 /**
@@ -24,7 +26,7 @@ use Phalcon\Mvc\Router;
  *
  * @package App\Http\Controllers
  */
-class Kernel extends KernelCore implements KernelInterface
+class Kernel extends Http
 {
     /**
      * Return the Provider List to load.
@@ -69,7 +71,7 @@ class Kernel extends KernelCore implements KernelInterface
         /*
          * SomeApi Service
          */
-        \App\Providers\SomeApiServices::class
+        SomeApiProvider::class
     ];
 
     /**

@@ -8,4 +8,4 @@ require __DIR__ . '/autoload.php';
 /**
  * Creating the application
  */
-return new \Luxury\Foundation\Application\Http();
+return new \Luxury\Foundation\Application();

@@ -2,8 +2,8 @@
 
 namespace Luxury\Foundation;
 
-use Luxury\Events\Listener;
 use Luxury\Constants\Services;
+use Luxury\Events\Listener;
 use Luxury\Middleware\Middleware;
 use Luxury\Support\Facades\Facade;
 use Phalcon\Di;
@@ -30,20 +30,6 @@ trait Kernelize
             /** @var \Phalcon\Application $this */
             $prv->register($this->getDI());
         }
-    }
-
-    /**
-     * This methods registers the routes of the application
-     */
-    public function registerRoutes()
-    {
-        $router = $this->router;
-
-        $config = $this->config;
-
-        $base = isset($config->application->baseUri) ? $config->application->baseUri : '';
-
-        $this->routes($router, $base);
     }
 
     /**

@@ -3,30 +3,27 @@
 namespace App\Http;
 
 use App\Providers\SomeApiServices as SomeApiProvider;
-use Luxury\Foundation\Application\Http;
-use Luxury\Http\Middleware\Throttle as ThrottleMiddleware;
+use Luxury\Foundation\Application\Http as HttpApplication;
 use Luxury\Foundation\Middleware\Debug as DebugMiddleware;
-use Luxury\Providers\{
-    Auth as AuthProvider,
-    Config as ConfigProvider,
-    Database as DatabaseProvider,
-    Flash as FlashProvider,
-    Http\Dispatcher as DispatcherProvider,
-    Http\Router as RouterProvider,
-    HttpClient as HttpClientProvider,
-    Logger as LoggerProvider,
-    Session as SessionProvider,
-    Url as UrlProvider,
-    View as ViewProvider
-};
-use Phalcon\Mvc\Router;
+use Luxury\Http\Middleware\Throttle as ThrottleMiddleware;
+use Luxury\Providers\Auth as AuthProvider;
+use Luxury\Providers\Config as ConfigProvider;
+use Luxury\Providers\Database as DatabaseProvider;
+use Luxury\Providers\Flash as FlashProvider;
+use Luxury\Providers\Http\Dispatcher as DispatcherProvider;
+use Luxury\Providers\Http\Router as RouterProvider;
+use Luxury\Providers\HttpClient as HttpClientProvider;
+use Luxury\Providers\Logger as LoggerProvider;
+use Luxury\Providers\Session as SessionProvider;
+use Luxury\Providers\Url as UrlProvider;
+use Luxury\Providers\View as ViewProvider;
 
 /**
  * Class Kernel
  *
  * @package App\Http\Controllers
  */
-class Kernel extends Http
+class Kernel extends HttpApplication
 {
     /**
      * Return the Provider List to load.
@@ -86,12 +83,15 @@ class Kernel extends Http
 
     /**
      * Register the routes of the application.
-     *
-     * @param Router $router
-     * @param string $base
      */
-    public function routes($router, $base = '')
+    public function registerRoutes()
     {
+        $router = $this->router;
+
+        $config = $this->config;
+
+        $base = isset($config->application->baseUri) ? $config->application->baseUri : '/';
+
         $router->setDefaultNamespace('App\Http\Controllers');
 
         $router->notFound([

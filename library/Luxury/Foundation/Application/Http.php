@@ -3,15 +3,18 @@
 namespace Luxury\Foundation\Application;
 
 use Luxury\Foundation\Kernelize;
-use Phalcon\Mvc\Application;
+use Luxury\Interfaces\Kernel;
 use Phalcon\Di\FactoryDefault as Di;
+use Phalcon\Mvc\Application as PhApplication;
 
 /**
  * Class Http
  *
  * @package Luxury\Foundation\Application
+ *
+ * @property-read \Phalcon\Config|\stdClass|array
  */
-abstract class Http extends Application
+abstract class Http extends PhApplication implements Kernel
 {
     use Kernelize;
 

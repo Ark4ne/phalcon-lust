@@ -4,7 +4,6 @@ namespace App\Http\Controllers;
 
 use App\Constants\Services;
 use App\Facades\SomeApi;
-use Luxury\Middleware\Wtf as WtfMiddleware;
 
 /**
  * Class IndexController
@@ -16,8 +15,6 @@ class IndexController extends ControllerBase
     protected function onConstruct()
     {
         parent::onConstruct();
-
-        $this->middleware(new WtfMiddleware());
     }
 
     public function indexAction()

@@ -3,16 +3,14 @@
 namespace App\Cli;
 
 use App\Providers\SomeApiServices as SomeApiProvider;
-use Luxury\Foundation\Application\Cli;
+use Luxury\Foundation\Application\Cli as CliApplication;
 use Luxury\Foundation\Middleware\Debug as DebugMiddleware;
-use Luxury\Providers\{
-    Cli\Dispatcher as DispatcherProvider,
-    Cli\Router as RouterProvider,
-    Config as ConfigProvider,
-    Database as DatabaseProvider,
-    HttpClient as HttpClientProvider,
-    Logger as LoggerProvider
-};
+use Luxury\Providers\Cli\Dispatcher as DispatcherProvider;
+use Luxury\Providers\Cli\Router as RouterProvider;
+use Luxury\Providers\Config as ConfigProvider;
+use Luxury\Providers\Database as DatabaseProvider;
+use Luxury\Providers\HttpClient as HttpClientProvider;
+use Luxury\Providers\Logger as LoggerProvider;
 use Phalcon\Cli\Router;
 
 /**
@@ -20,7 +18,7 @@ use Phalcon\Cli\Router;
  *
  * @package App\Http\Controllers
  */
-class Kernel extends Cli
+class Kernel extends CliApplication
 {
     /**
      * Return the Provider List to load.
@@ -70,11 +68,8 @@ class Kernel extends Cli
 
     /**
      * Register the routes of the application.
-     *
-     * @param Router $router
-     * @param string $base
      */
-    public function routes($router, $base = '')
+    public function registerRoutes()
     {
     }
 }

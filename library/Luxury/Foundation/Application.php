@@ -2,6 +2,11 @@
 
 namespace Luxury\Foundation;
 
+/**
+ * Class Application
+ *
+ * @package Luxury\Foundation
+ */
 class Application
 {
     /**
@@ -11,7 +16,7 @@ class Application
      */
     public function make($kernelClass)
     {
-        /** @var \Phalcon\Application|Kernelize $kernel */
+        /** @var \Phalcon\Application|Kernelize|\Luxury\Interfaces\Kernel $kernel */
         $kernel = new $kernelClass;
 
         $kernel->bootstrap();

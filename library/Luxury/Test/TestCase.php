@@ -2,6 +2,7 @@
 
 namespace Luxury\Test;
 
+use Luxury\Foundation\Kernelize;
 use Mockery;
 use Phalcon\Application;
 use Phalcon\Config;
@@ -30,7 +31,7 @@ abstract class TestCase extends UnitTestCase implements InjectionAwareInterface
     protected $config;
 
     /**
-     * @var Application
+     * @var Application|Kernelize
      */
     protected $app;
 
@@ -40,7 +41,7 @@ abstract class TestCase extends UnitTestCase implements InjectionAwareInterface
     protected $lxApp;
 
     /**
-     * @var Application
+     * @var Application|Kernelize
      */
     protected static $appGlobal;
 

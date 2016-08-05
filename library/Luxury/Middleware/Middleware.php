@@ -7,7 +7,7 @@ use Luxury\Events\Listener;
 /**
  * Class Middleware
  *
- * @package     Luxury\Middleware
+ * @package Luxury\Middleware
  */
 abstract class Middleware extends Listener
 {
